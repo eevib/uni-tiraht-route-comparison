@@ -52,7 +52,11 @@ tietyissä tapauksissa.
 - puu (JPS)
 - keko (JPS)
 
-### Lähteet
+## Miksi?
+
+Algoritmien valinta perustui kurssimateriaalin aihelistan mainintoihin.
+
+## Lähteet
 
 - ["A\* search algorithm", Wikipedia](https://en.wikipedia.org/wiki/A\*\_search\_algorithm)
 - ["Jump Point Search", Daniel Haraborin blogi](https://harablog.wordpress.com/2011/09/07/jump-point-search/)
