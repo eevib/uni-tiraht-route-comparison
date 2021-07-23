@@ -54,6 +54,6 @@ tietyissä tapauksissa.
 
 ### Lähteet
 
-- https://en.wikipedia.org/wiki/A\*\_search\_algorithm
-- https://harablog.wordpress.com/2011/09/07/jump-point-search/
-- https://en.wikipedia.org/wiki/Iterative\_deepening\_A\*
+- ["A\* search algorithm", Wikipedia](https://en.wikipedia.org/wiki/A\*\_search\_algorithm)
+- ["Jump Point Search", Daniel Haraborin blogi](https://harablog.wordpress.com/2011/09/07/jump-point-search/)
+- ["Iterative deepening A\*", Wikipedia](https://en.wikipedia.org/wiki/Iterative\_deepening_A\*)
