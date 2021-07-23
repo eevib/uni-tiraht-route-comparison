@@ -3,6 +3,7 @@
 ## Meta
 
 Opinto-ohjelma: TKT
+
 Projektissa käytetty luonnollinen kieli: suomi
 
 ## Mitä?
