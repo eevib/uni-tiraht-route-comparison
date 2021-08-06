@@ -41,6 +41,8 @@ public class RuudukkoTest {
         assertEquals(true, ruudukko.ruutuEstynyt(-1, KORKEUS));
         assertEquals(true, ruudukko.ruutuEstynyt(LEVEYS, -1));
         assertEquals(true, ruudukko.ruutuEstynyt(LEVEYS, KORKEUS));
+        assertEquals(true, ruudukko.ruutuEstynyt(0, KORKEUS));
+        assertEquals(true, ruudukko.ruutuEstynyt(LEVEYS, 0));
     }
 
     @Test
@@ -58,6 +60,25 @@ public class RuudukkoTest {
         } catch (Exception e) {
             assertEquals(true, true);
         }
+        try {
+            ruudukko = new Ruudukko(1, 0);
+            assertEquals(true, false);
+        } catch (Exception e) {
+            assertEquals(true, true);
+        }
+        try {
+            ruudukko = new Ruudukko(0, 1);
+            assertEquals(true, false);
+        } catch (Exception e) {
+            assertEquals(true, true);
+        }
+    }
+
+    @Test
+    public void yksiruutuinenRuudukkoLuodaan() throws Exception {
+        ruudukko = new Ruudukko(1, 1);
+        assertEquals(1, ruudukko.getLeveys());
+        assertEquals(1, ruudukko.getKorkeus());
     }
 
     @Test
@@ -66,6 +87,8 @@ public class RuudukkoTest {
         ruudukko.asetaEste(true, -1, KORKEUS);
         ruudukko.asetaEste(true, LEVEYS, -1);
         ruudukko.asetaEste(true, LEVEYS, KORKEUS);
+        ruudukko.asetaEste(true, 0, KORKEUS);
+        ruudukko.asetaEste(true, LEVEYS, 0);
 
         for (int y = 0; y < KORKEUS; ++y) {
             for (int x = 0; x < LEVEYS; ++x) {
