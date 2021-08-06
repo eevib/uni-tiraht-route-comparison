@@ -14,8 +14,10 @@ public class Ruudukko {
      *
      * Ruudukko on alustavasti tyhjä, eli jokaisen ruudun arvo on epätosi.
      *
-     * @param leveys  Luotavan ruudukon leveys ruutuina
-     * @param korkeus Luotavan ruudukon korkeus ruutuina
+     * @param leveys     Luotavan ruudukon leveys ruutuina
+     * @param korkeus    Luotavan ruudukon korkeus ruutuina
+     *
+     * @throws Exception Heittää poikkeuksen, jos annettu koko on epäkelpo
      */
     public Ruudukko(int leveys, int korkeus) throws Exception {
         if (leveys <= 0 || korkeus <= 0) {
