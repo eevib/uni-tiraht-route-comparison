@@ -82,6 +82,15 @@ package org.meklu.routecomparison.domain;
  * </pre>
  */
 public class Heuristiikka {
+    /** Antaa arvion lyhimmästä mahdollisesta etäisyydestä pisteiden A ja B
+     * välillä
+     *
+     * @param ax Pisteen A x-koordinaatti
+     * @param ay Pisteen A y-koordinaatti
+     * @param bx Pisteen B x-koordinaatti
+     * @param by Pisteen B y-koordinaatti
+     * @return Lyhin mahdollinen oktiilinen etäisyys pisteiden A ja B välillä
+     */
     public double lyhinMahdollinenEtaisyys(int ax, int ay, int bx, int by) {
         int dx = Math.abs(bx - ax);
         int dy = Math.abs(by - ay);
