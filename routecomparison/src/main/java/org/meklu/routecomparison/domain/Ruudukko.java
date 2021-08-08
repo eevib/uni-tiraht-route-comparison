@@ -50,7 +50,7 @@ public class Ruudukko {
         return korkeus;
     }
 
-    private boolean ruudukonSisalla(int x, int y) {
+    public boolean ruudukonSisalla(int x, int y) {
         if (x < 0 || y < 0) {
             return false;
         }
