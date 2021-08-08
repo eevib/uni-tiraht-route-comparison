@@ -7,8 +7,8 @@ import org.meklu.routecomparison.domain.Koordinaatti;
 import org.meklu.routecomparison.domain.Ruudukko;
 
 public class Reitintutkija {
-    private final static double diagonaalinenPaino = Math.sqrt(2);
-    private final static double suoraPaino = 1;
+    private final static double DIAGONAALIPAINO = Math.sqrt(2);
+    private final static double SUORAPAINO = 1;
     private Ruudukko ruudukko;
     private Ruudukko reitti;
 
@@ -45,21 +45,19 @@ public class Reitintutkija {
             int dx = Math.abs(nykyinenX - aiempiX);
             int dy = Math.abs(nykyinenY - aiempiY);
             if (dx > 1 || dy > 1) {
-                reitissaKoloja = true;
-            }
-            if (dx == 1 && dy == 1) {
-                reitinPituus += diagonaalinenPaino;
-            } else if (dx == 1 && dy == 0 || dx == 0 && dy == 1) {
-                reitinPituus += suoraPaino;
-            } else if (dx == 0 && dy == 0) {
-                // NOP
-            } else {
                 // Kolon hyppiminen, joten otetaan vain geometrinen etäisyys.
                 // Periaatteessa tämä oltaisiin voitu ottaa joka kohdassa, mutta
                 // tämä on laskennallisesti hitusen kalliimpaa kuin etukäteen
                 // laskettujen painojen ynnääminen. Eipä tällä niin väliä ole.
                 reitinPituus += Math.sqrt(dx * dx + dy * dy);
+                reitissaKoloja = true;
+            } else if (dx == 1 && dy == 1) {
+                reitinPituus += DIAGONAALIPAINO;
+            } else if (dx == 1 || dy == 1) {
+                reitinPituus += SUORAPAINO;
             }
+            // Tässä olisi vielä tyhjä konditionaali (dx == 0 && dy == 0),
+            // mutta se olisi vain NOP.
             if (!this.reitti.ruudukonSisalla(nykyinenX, nykyinenY)) {
                 reittiOhiRuudukosta = true;
             }

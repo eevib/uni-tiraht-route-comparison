@@ -41,7 +41,7 @@ public class AStar implements Reitinhakija {
 
         PriorityQueue<Pari<Double, Koordinaatti>> avoimetSolmut =
                 new PriorityQueue<Pari<Double, Koordinaatti>>(
-                        (pA, pB) -> pA.getA().compareTo(pB.getA())
+                    (pA, pB) -> pA.getA().compareTo(pB.getA())
                 );
         avoimetSolmut.add(new Pari<Double, Koordinaatti>(0.0, new Koordinaatti(lahtoX, lahtoY)));
 
@@ -76,7 +76,9 @@ public class AStar implements Reitinhakija {
         double diagonaaliPaino = Math.sqrt(2);
         for (int i = 0, x = -1; x <= 1 && i < naapurit.length; ++x) {
             for (int y = -1; y <= 1 && i < naapurit.length; ++y) {
-                if (x == 0 && y == 0) { continue; }
+                if (x == 0 && y == 0) {
+                    continue;
+                }
                 if (x != 0 && y != 0) {
                     naapurienPainot[i] = diagonaaliPaino;
                 } else {
