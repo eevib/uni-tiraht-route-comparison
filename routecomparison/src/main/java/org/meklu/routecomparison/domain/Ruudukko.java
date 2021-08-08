@@ -50,6 +50,12 @@ public class Ruudukko {
         return korkeus;
     }
 
+    /** Tarkistaa, onko tietty koordinaatti ruudukon sisällä
+     *
+     * @param x x-koordinaatti
+     * @param y y-koordinaatti
+     * @return Tosi, jos koordinaatti on ruudukon sisällä.
+     */
     public boolean ruudukonSisalla(int x, int y) {
         if (x < 0 || y < 0) {
             return false;
