@@ -21,7 +21,7 @@ public class Reitintutkija {
     boolean reittiOhiRuudukosta = false;
 
     double reitinPituus = Double.NaN;
-    int reitissaSolmuja;
+    int reitissaSolmuja = -1;
 
     /** Palauttaa reitin pituuden
      *
