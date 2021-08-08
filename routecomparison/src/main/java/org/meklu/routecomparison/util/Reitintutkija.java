@@ -4,6 +4,11 @@ package org.meklu.routecomparison.util;
 import org.meklu.routecomparison.domain.Koordinaatti;
 import org.meklu.routecomparison.domain.Ruudukko;
 
+/** Reitintutkija on apuluokka reitinhakijan tuottaman reitin tarkasteluun.
+ *
+ * Valtaosa tämän luokan tuottamasta tiedosta generoidaan suoraan
+ * konstruktorissa.
+ */
 public class Reitintutkija {
     private final static double DIAGONAALIPAINO = Math.sqrt(2);
     private final static double SUORAPAINO = 1;
@@ -18,13 +23,27 @@ public class Reitintutkija {
     double reitinPituus = Double.NaN;
     int reitissaSolmuja;
 
+    /** Palauttaa reitin pituuden
+     *
+     * @return Reitin pituus
+     */
     public double getReitinPituus() {
         return reitinPituus;
     }
+
+    /** Palauttaa reitissä olevien solmujen määrän
+     *
+     * @return Reitin sisältämien solmujen määrä
+     */
     public int getReitissaSolmuja() {
         return reitissaSolmuja;
     }
 
+    /** Luo reitintutkijan
+     *
+     * @param ruudukko Ruudukko, jota reitti koskee
+     * @param reitti   Reitti, jota käsitellään
+     */
     public Reitintutkija(Ruudukko ruudukko, Koordinaatti[] reitti) {
         this.ruudukko = ruudukko;
         try {
@@ -79,22 +98,64 @@ public class Reitintutkija {
         }
     }
 
+    /** Palauttaa totuusarvon siitä, onko reitissä koloja.
+     *
+     * Tällä tarkoitetaan ei-naapurisolmujen välistä liikehdintää. Alla
+     * esimerkki, jossa hyppy merkattu huutomerkillä:
+     * <pre>
+     *   _0_1_2_3_4_5_
+     * 0| A - - - - - |
+     * 1| - 2 - - - - |
+     * 2| - - ! - - - |
+     * 3| - - - 3 4 B |
+     * </pre>
+     *
+     * @return Tosi, jos reitissä on koloja
+     */
     public boolean onkoReitissaKoloja() {
         return reitissaKoloja;
     }
 
+    /** Palauttaa totuusarvon siitä, onko reitissä törmäyksiä.
+     *
+     * Tällä tarkoitetaan reitin kulkevan estyneiden ruutujen kautta.
+     *
+     * @return Tosi, jos reitissä on törmäyksiä
+     */
     public boolean onkoReitissaTormayksia() {
         return reitissaTormayksia;
     }
 
+    /** Palauttaa totuusarvon siitä, onko reitissä päällekkäisyyksiä.
+     *
+     * Tällä tarkoitetaan sitä, että reitissä esiintyy sama solmu useammin kuin
+     * vain yhden kerran.
+     *
+     * @return Tosi, jos reitissä on päällekkäisyyksiä
+     */
     public boolean onkoReitissaPaallekkaisyyksia() {
         return reitissaPaallekkaisyyksia;
     }
 
+    /** Palauttaa totuusarvon siitä, onko reitti käynyt ruudukon ulkopuolella
+     *
+     * @return Tosi, jos reitti käy ruudukon ulkopuolella
+     */
     public boolean onkoReittiOhiRuudukosta() {
         return reittiOhiRuudukosta;
     }
 
+    /** Apufunktio reitin ja ruudukon tulostamiseen komentoriville.
+     *
+     * Tulostaa myös muut reitin ominaisuudet. Alla selitteet ruudukossa
+     * mahdollisesti esiintyville merkeille:
+     * <pre>
+     *    {@literal @} : reitti kulkee tämän ruudun kautta
+     *    * : tässä ruudussa on este
+     *    - : tyhjä ruutu
+     *    X : reitti on törmännyt esteeseen
+     * </pre>
+     */
     public void tulostaTekstina() {
         for (int y = 0; y < this.ruudukko.getKorkeus(); ++y) {
             for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
