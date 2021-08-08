@@ -99,25 +99,20 @@ public class AStar implements Reitinhakija {
                 int naapuriY = nykyinenY + naapurit[i].getY();
                 double paino = naapurienPainot[i];
                 Koordinaatti naapuri = new Koordinaatti(naapuriX, naapuriY);
-                System.out.println("naapuri: " + naapuri.toString() + ", paino " + paino);
                 if (!this.ruudukko.ruudukonSisalla(naapuriX, naapuriY)) {
-                    System.out.println("naapuri ei ruudukon sisällä");
                     continue;
                 }
                 double mahdollinenHalvinReittiTahan = halvinReittiTahan[nykyinenY][nykyinenX] + paino;
                 if (mahdollinenHalvinReittiTahan < halvinReittiTahan[naapuriY][naapuriX]) {
-                    System.out.println("halpa naapuri");
                     tulosuunnat[naapuriY][naapuriX] = nykyinen;
                     halvinReittiTahan[naapuriY][naapuriX] = mahdollinenHalvinReittiTahan;
                     halvinReittiMaaliin[naapuriY][naapuriX] = mahdollinenHalvinReittiTahan + this.heuristiikka.lyhinMahdollinenEtaisyys(naapuriX, naapuriY, maaliX, maaliY);
                     if (!avoimetSolmut.stream().anyMatch((p) -> p.getB().equals(naapuri))) {
-                        System.out.println("lisätään naapuri avoimiin");
                         avoimetSolmut.add(new Pari<>(halvinReittiMaaliin[naapuriY][naapuriX], naapuri));
                     }
                 }
             }
         }
-        System.out.println("fugg :D");
         return null;
     }
 
