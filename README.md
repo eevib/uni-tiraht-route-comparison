@@ -10,4 +10,4 @@ reitinhakualgoritmien vertailu.
 ## Viikkoraportit
 
 - [Viikkoraportti 1](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/viikkoraportti_1.md)
-- Viikkoraportti 3 tulee tod. näk. tänä iltana su 8.8.
+- [Viikkoraportti 3](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/viikkoraportti_3.md)
