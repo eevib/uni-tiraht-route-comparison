@@ -1,8 +1,6 @@
 
 package org.meklu.routecomparison.util;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.meklu.routecomparison.domain.Koordinaatti;
 import org.meklu.routecomparison.domain.Ruudukko;
 
