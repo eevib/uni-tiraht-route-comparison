@@ -85,12 +85,13 @@ public class Reitintutkija {
             // mutta se olisi vain NOP.
             if (!this.reitti.ruudukonSisalla(nykyinenX, nykyinenY)) {
                 reittiOhiRuudukosta = true;
-            }
-            if (this.reitti.ruutuEstynyt(nykyinenX, nykyinenY)) {
-                reitissaPaallekkaisyyksia = true;
-            }
-            if (this.ruudukko.ruutuEstynyt(nykyinenX, nykyinenY)) {
-                reitissaTormayksia = true;
+            } else {
+                if (this.reitti.ruutuEstynyt(nykyinenX, nykyinenY)) {
+                    reitissaPaallekkaisyyksia = true;
+                }
+                if (this.ruudukko.ruutuEstynyt(nykyinenX, nykyinenY)) {
+                    reitissaTormayksia = true;
+                }
             }
             this.reitti.asetaEste(true, nykyinenX, nykyinenY);
             aiempiX = nykyinenX;
