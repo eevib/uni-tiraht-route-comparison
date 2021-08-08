@@ -18,9 +18,13 @@ public class Reitintutkija {
     boolean reittiOhiRuudukosta = false;
 
     double reitinPituus = Double.NaN;
+    int reitissaSolmuja;
 
     public double getReitinPituus() {
         return reitinPituus;
+    }
+    public int getReitissaSolmuja() {
+        return reitissaSolmuja;
     }
 
     public Reitintutkija(Ruudukko ruudukko, Koordinaatti[] reitti) {
@@ -36,6 +40,7 @@ public class Reitintutkija {
             this.reitti = null;
             return;
         }
+        this.reitissaSolmuja = reitti.length;
         this.reitinPituus = 0.0;
         int aiempiX = reitti[0].getX();
         int aiempiY = reitti[0].getY();
@@ -52,6 +57,9 @@ public class Reitintutkija {
                 reitinPituus += Math.sqrt(dx * dx + dy * dy);
                 reitissaKoloja = true;
             } else if (dx == 1 && dy == 1) {
+                // Teoriassa saisimme paremman tarkkuuden, jos laskisimme
+                // diagonaalisten siirtojen määrän ja ynnäisimme sen perusteella
+                // hienomman luvun loppusummaan.
                 reitinPituus += DIAGONAALIPAINO;
             } else if (dx == 1 || dy == 1) {
                 reitinPituus += SUORAPAINO;
@@ -110,7 +118,7 @@ public class Reitintutkija {
             System.out.println("Ei ratkaisua.");
             return;
         }
-        System.out.println("Reitin pituus on " + this.reitinPituus + ".");
+        System.out.println("Reitin pituus on " + this.reitinPituus + ", solmuja " + this.reitissaSolmuja + ".");
         if (this.reitissaKoloja) {
             System.out.println("Reitissä on koloja. Reitin pituus voi olla erikoinen.");
         }
