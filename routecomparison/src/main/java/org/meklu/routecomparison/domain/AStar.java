@@ -102,6 +102,9 @@ public class AStar implements Reitinhakija {
                 if (!this.ruudukko.ruudukonSisalla(naapuriX, naapuriY)) {
                     continue;
                 }
+                if (this.ruudukko.ruutuEstynyt(naapuriX, naapuriY)) {
+                    continue;
+                }
                 double mahdollinenHalvinReittiTahan = halvinReittiTahan[nykyinenY][nykyinenX] + paino;
                 if (mahdollinenHalvinReittiTahan < halvinReittiTahan[naapuriY][naapuriX]) {
                     tulosuunnat[naapuriY][naapuriX] = nykyinen;
