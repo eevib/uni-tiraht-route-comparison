@@ -101,9 +101,6 @@ public class AStar implements Reitinhakija {
                 int naapuriY = nykyinenY + naapurit[i].getY();
                 double paino = naapurienPainot[i];
                 Koordinaatti naapuri = new Koordinaatti(naapuriX, naapuriY);
-                if (!this.ruudukko.ruudukonSisalla(naapuriX, naapuriY)) {
-                    continue;
-                }
                 if (this.ruudukko.ruutuEstynyt(naapuriX, naapuriY)) {
                     continue;
                 }
