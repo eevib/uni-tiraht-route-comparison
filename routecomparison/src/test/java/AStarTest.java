@@ -1,6 +1,6 @@
 
 import org.meklu.routecomparison.domain.*;
-
+import org.meklu.routecomparison.util.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +28,8 @@ public class AStarTest {
         Koordinaatti[] reitti = astar.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
         assertNotNull(reitti);
         assertEquals(6, reitti.length);
-        // TODO: laske reitin varsinainen painollinen pituus
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        assertEquals(rt.getReitinPituus(), heuristiikka.lyhinMahdollinenEtaisyys(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1), 0.0001);
     }
 
     @Test
