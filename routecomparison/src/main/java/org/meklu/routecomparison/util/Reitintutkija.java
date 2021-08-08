@@ -87,7 +87,7 @@ public class Reitintutkija {
         return reitissaPaallekkaisyyksia;
     }
 
-    public boolean oknoReittiOhiRuudukosta() {
+    public boolean onkoReittiOhiRuudukosta() {
         return reittiOhiRuudukosta;
     }
 
