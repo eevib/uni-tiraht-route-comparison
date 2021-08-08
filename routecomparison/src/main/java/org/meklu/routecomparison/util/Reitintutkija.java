@@ -98,6 +98,19 @@ public class Reitintutkija {
         }
     }
 
+    /** Mikäli reitissä on ongelmia, tämä metodi kertoo siitä
+     *
+     * @return Tosi, jos reitissä on ongelmia
+     */
+    public boolean onkoReitissaOngelmia() {
+        return (
+            this.onkoReitissaKoloja() ||
+            this.onkoReitissaPaallekkaisyyksia() ||
+            this.onkoReitissaTormayksia() ||
+            this.onkoReittiOhiRuudukosta()
+        );
+    }
+
     /** Palauttaa totuusarvon siitä, onko reitissä koloja.
      *
      * Tällä tarkoitetaan ei-naapurisolmujen välistä liikehdintää. Alla

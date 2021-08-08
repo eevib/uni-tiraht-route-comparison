@@ -30,6 +30,7 @@ public class AStarTest {
         assertEquals(6, reitti.length);
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         assertEquals(rt.getReitinPituus(), heuristiikka.lyhinMahdollinenEtaisyys(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1), 0.0001);
+        assertEquals(false, rt.onkoReitissaOngelmia());
     }
 
     @Test
@@ -43,4 +44,48 @@ public class AStarTest {
         Koordinaatti[] reitti = astar.etsiReitti(0, 0, this.ruudukko.getLeveys(), this.ruudukko.getKorkeus());
         assertNull(reitti);
     }
+
+    @Test
+    public void yksinkertaisenRuudukonReittiOnOptimi() {
+        /*
+          | @ * - - - - |
+          | @ * - - - - |
+          | @ * - - - - |
+          | - @ @ @ @ @ |
+          |Reitin pituus on 7.414213562373095, solmuja 8.
+        */
+        for (int y = 0; y < ruudukko.getKorkeus() - 1; ++y) {
+            ruudukko.asetaEste(true, 1, y);
+        }
+        Koordinaatti[] reitti = astar.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
+        assertNotNull(reitti);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        assertEquals(7.4142, rt.getReitinPituus(), 0.0001);
+        assertEquals(8, rt.getReitissaSolmuja());
+        assertEquals(false, rt.onkoReitissaOngelmia());
+    }
+
+    @Test
+    public void hienommanRuudukonReittiOnOptimi() {
+        /*
+          | @ * - @ - - |
+          | @ * @ * @ - |
+          | @ * @ * @ - |
+          | - @ - * - @ |
+          |Reitin pituus on 11.071067811865476, solmuja 10.
+        */
+        for (int y = 0; y < ruudukko.getKorkeus() - 1; ++y) {
+            ruudukko.asetaEste(true, 1, y);
+        }
+        for (int y = 1; y < ruudukko.getKorkeus(); ++y) {
+            ruudukko.asetaEste(true, 3, y);
+        }
+        Koordinaatti[] reitti = astar.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
+        assertNotNull(reitti);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        assertEquals(11.0710, rt.getReitinPituus(), 0.0001);
+        assertEquals(10, rt.getReitissaSolmuja());
+        assertEquals(false, rt.onkoReitissaOngelmia());
+    }
+
 }
