@@ -126,4 +126,54 @@ public class ReitintutkijaTest {
         assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
         assertEquals(false, rt.onkoReitissaOngelmia());
     }
+
+    @Test
+    public void tyhjaTulosteKunnossa() {
+        Reitintutkija rt = new Reitintutkija(ruudukko, null);
+        String odotettu = (
+            " - - - - - -\n" +
+            " - - - - - -\n" +
+            " - - - - - -\n" +
+            " - - - - - -\n"
+        );
+        assertEquals(odotettu, rt.tekstiKartta());
+    }
+
+    @Test
+    public void reitillinenTulosteKunnossa() {
+        Koordinaatti[] reitti = new Koordinaatti[4];
+        reitti[0] = new Koordinaatti(0, 0);
+        reitti[1] = new Koordinaatti(1, 1);
+        reitti[2] = new Koordinaatti(2, 2);
+        reitti[3] = new Koordinaatti(3, 3);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        String odotettu = (
+            " @ - - - - -\n" +
+            " - @ - - - -\n" +
+            " - - @ - - -\n" +
+            " - - - @ - -\n"
+        );
+        assertEquals(odotettu, rt.tekstiKartta());
+    }
+
+    @Test
+    public void esteellinenTulosteKunnossa() {
+        this.ruudukko.asetaEste(true, 1, 0);
+        this.ruudukko.asetaEste(true, 1, 1);
+        this.ruudukko.asetaEste(true, 1, 2);
+        this.ruudukko.asetaEste(true, 1, 3);
+        Koordinaatti[] reitti = new Koordinaatti[4];
+        reitti[0] = new Koordinaatti(0, 0);
+        reitti[1] = new Koordinaatti(1, 1);
+        reitti[2] = new Koordinaatti(2, 2);
+        reitti[3] = new Koordinaatti(3, 3);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        String odotettu = (
+            " @ * - - - -\n" +
+            " - X - - - -\n" +
+            " - * @ - - -\n" +
+            " - * - @ - -\n"
+        );
+        assertEquals(odotettu, rt.tekstiKartta());
+    }
 }

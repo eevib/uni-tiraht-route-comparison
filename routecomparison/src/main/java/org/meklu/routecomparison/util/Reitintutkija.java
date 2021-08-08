@@ -103,6 +103,10 @@ public class Reitintutkija {
      *
      * @return Tosi, jos reitissä on ongelmia
      */
+    // Checkstyle on väärässä ja haluaa syvemmän sisennyksen returnin sulkevalle
+    // sulkeelle. Jollain muullakin on sama ongelma:
+    // https://stackoverflow.com/questions/47079346/how-allow-less-indent-for-closing-parentheses-inside-a-method-with-checkstyle
+    @SuppressWarnings("checkstyle:Indentation")
     public boolean onkoReitissaOngelmia() {
         return (
             this.onkoReitissaKoloja() ||
@@ -159,34 +163,45 @@ public class Reitintutkija {
         return reittiOhiRuudukosta;
     }
 
-    /** Apufunktio reitin ja ruudukon tulostamiseen komentoriville.
+    /** Luo reitistä ja ruudukosta karttaa esittävän merkkijonon
      *
-     * Tulostaa myös muut reitin ominaisuudet. Alla selitteet ruudukossa
-     * mahdollisesti esiintyville merkeille:
+     * <p>Alla selitteet ruudukossa mahdollisesti esiintyville merkeille:
      * <pre>
      *    {@literal @} : reitti kulkee tämän ruudun kautta
      *    * : tässä ruudussa on este
      *    - : tyhjä ruutu
      *    X : reitti on törmännyt esteeseen
      * </pre>
+     *
+     * @return Merkkijonoesitys reitistä ruudukkoa vasten, loppuen rivinvaihtoon
      */
-    public void tulostaTekstina() {
+    public String tekstiKartta() {
+        String kartta = "";
         for (int y = 0; y < this.ruudukko.getKorkeus(); ++y) {
             for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
                 boolean este = this.ruudukko.ruutuEstynyt(x, y);
                 boolean askel = (this.reitti != null) && this.reitti.ruutuEstynyt(x, y);
                 if (este && askel) {
-                    System.out.print(" X");
+                    kartta += " X";
                 } else if (este) {
-                    System.out.print(" *");
+                    kartta += " *";
                 } else if (askel) {
-                    System.out.print(" @");
+                    kartta += " @";
                 } else {
-                    System.out.print(" -");
+                    kartta += " -";
                 }
             }
-            System.out.println("");
+            kartta += "\n";
         }
+        return kartta;
+    }
+
+    /** Apufunktio reitin ja ruudukon tulostamiseen komentoriville.
+     *
+     * Tulostaa myös muut reitin ominaisuudet.
+     */
+    public void tulostaTekstina() {
+        System.out.println(this.tekstiKartta());
         if (this.reitti == null) {
             System.out.println("Ei ratkaisua.");
             return;
