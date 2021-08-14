@@ -43,7 +43,7 @@ public class AStar implements Reitinhakija {
      */
     @Override
     public Koordinaatti[] etsiReitti(int lahtoX, int lahtoY, int maaliX, int maaliY) {
-        // Paetaan sen kummemmitta, mikäli
+        // Paetaan sen kummemmitta, mikäli koordinaatit ruudukon ulkopuolella
         if (!this.ruudukko.ruudukonSisalla(maaliX, maaliY) || !this.ruudukko.ruudukonSisalla(lahtoX, lahtoY)) {
             return null;
         }
@@ -52,11 +52,18 @@ public class AStar implements Reitinhakija {
         // Parin a-komponentin suhteen. Parin a-komponenttina on siihen
         // täsmäävän solmun paras hinta-arvio.
         PriorityQueue<Pari<Double, Koordinaatti>> avoimetSolmut =
-                new PriorityQueue<Pari<Double, Koordinaatti>>(
+                new PriorityQueue<>(
                     (pA, pB) -> pA.getA().compareTo(pB.getA())
                 );
         // aluksi sisältää vain lähtösolmun
-        avoimetSolmut.add(new Pari<Double, Koordinaatti>(0.0, new Koordinaatti(lahtoX, lahtoY)));
+        avoimetSolmut.add(new Pari<>(0.0, new Koordinaatti(lahtoX, lahtoY)));
+        // ja avustava hakutaulu solmujen esiintymiseen edeltävässä tietorakenteessa
+        boolean[][] avoimissaSolmuissa = new boolean[this.ruudukko.getKorkeus()][this.ruudukko.getLeveys()];
+        for (int y = 0; y < this.ruudukko.getKorkeus(); ++y) {
+            for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
+                avoimissaSolmuissa[y][x] = false;
+            }
+        }
 
         // Kätevä hakutaulu tulosuunnallemme. Sisältää käsiteltävän polun
         // jokaista koordinaattia (x,y) vastaavan sitä edeltäneen koordinaatin
@@ -115,6 +122,7 @@ public class AStar implements Reitinhakija {
             }
             int nykyinenX = nykyinen.getX();
             int nykyinenY = nykyinen.getY();
+            avoimissaSolmuissa[nykyinenY][nykyinenX] = false;
 
             for (int i = 0; i < naapurit.length; ++i) {
                 int naapuriX = nykyinenX + naapurit[i].getX();
@@ -129,9 +137,9 @@ public class AStar implements Reitinhakija {
                     tulosuunnat[naapuriY][naapuriX] = nykyinen;
                     halvinReittiTahan[naapuriY][naapuriX] = mahdollinenHalvinReittiTahan;
                     halvinReittiMaaliin[naapuriY][naapuriX] = mahdollinenHalvinReittiTahan + this.heuristiikka.lyhinMahdollinenEtaisyys(naapuriX, naapuriY, maaliX, maaliY);
-                    // TODO: köh köh, pitäisi optimoida tämä tästä hinputtiin hakutauluksi
-                    if (!avoimetSolmut.stream().anyMatch((p) -> p.getB().equals(naapuri))) {
+                    if (!avoimissaSolmuissa[naapuriY][naapuriX]) {
                         avoimetSolmut.add(new Pari<>(halvinReittiMaaliin[naapuriY][naapuriX], naapuri));
+                        avoimissaSolmuissa[naapuriY][naapuriX] = true;
                     }
                 }
             }
