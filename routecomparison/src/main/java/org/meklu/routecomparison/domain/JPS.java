@@ -169,6 +169,42 @@ public class JPS implements Reitinhakija {
         return oksitut;
     }
 
+    private boolean pakotettu(Koordinaatti solmu, Koordinaatti suunta) {
+        // TODO
+        return false;
+    }
+
+    private Koordinaatti hyppaa(Koordinaatti nykyinen, Koordinaatti suunta, Koordinaatti maali) {
+        Koordinaatti solmu = new Koordinaatti(nykyinen.getX() + suunta.getX(), nykyinen.getY() + suunta.getY());
+        if (ruudukko.ruutuEstynyt(solmu.getX(), solmu.getY())) {
+            return null;
+        }
+        if (solmu.equals(maali)) {
+            return solmu;
+        }
+        if (pakotettu(solmu, suunta)) {
+            return solmu;
+        }
+        if (suunta.getX() != 0 && suunta.getY() != 0) {
+            Koordinaatti[] suorat = {
+                new Koordinaatti(suunta.getX(), 0),
+                new Koordinaatti(0, suunta.getY())
+            };
+            for (int i = 0; i < suorat.length; ++i) {
+                if (hyppaa(solmu, suorat[i], maali) != null) {
+                    return solmu;
+                }
+            }
+        }
+        return hyppaa(solmu, suunta, maali);
+    }
+
+    private Koordinaatti[] seuraajat(Koordinaatti solmu, Koordinaatti vanhempi, Koordinaatti maali) {
+        LinkedList<Koordinaatti> seuraajat = new LinkedList<>();
+        Koordinaatti[] naapurit = this.oksi(solmu, vanhempi);
+        return null;
+    }
+
     /** Suorittaa JPS-reitinhakualgoritmin asetetussa ruudukossa
      *
      * @param lahtoX Lähtöpisteen x-koordinaatti
