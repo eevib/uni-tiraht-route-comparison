@@ -1,5 +1,4 @@
 
-import java.util.Arrays;
 import org.meklu.routecomparison.domain.*;
 import org.meklu.routecomparison.util.*;
 
@@ -206,7 +205,6 @@ public class JPSTest {
         ruudukko.asetaEste(true, 0, 1);
         ruudukko.asetaEste(true, 2, 1);
         Koordinaatti[] oksitut = jps.oksi(solmu, vanhempi);
-        System.out.println(Arrays.toString(oksitut));
         Koordinaatti[] odotetut = {
             null,
             null,
@@ -216,6 +214,122 @@ public class JPSTest {
             null,
             null,
             new Koordinaatti(2, 2)
+        };
+        assertArrayEquals(odotetut, oksitut);
+    }
+
+    @Test
+    public void oksiDiagonaalinPakotteetMukana() {
+        Koordinaatti vanhempi = new Koordinaatti(0, 0);
+        Koordinaatti solmu = new Koordinaatti(1, 1);
+        ruudukko.asetaEste(true, 1, 0);
+        ruudukko.asetaEste(true, 0, 1);
+        Koordinaatti[] oksitut = jps.oksi(solmu, vanhempi);
+        Koordinaatti[] odotetut = {
+            null,
+            null,
+            new Koordinaatti(0, 2),
+            null,
+            new Koordinaatti(1, 2),
+            new Koordinaatti(2, 0),
+            new Koordinaatti(2, 1),
+            new Koordinaatti(2, 2)
+        };
+        assertArrayEquals(odotetut, oksitut);
+    }
+
+    @Test
+    public void oksiDiagonaalinPakotteetMukana2() {
+        Koordinaatti vanhempi = new Koordinaatti(0, 0);
+        Koordinaatti solmu = new Koordinaatti(1, 1);
+        ruudukko.asetaEste(true, 0, 1);
+        Koordinaatti[] oksitut = jps.oksi(solmu, vanhempi);
+        Koordinaatti[] odotetut = {
+            null,
+            null,
+            new Koordinaatti(0, 2),
+            null,
+            new Koordinaatti(1, 2),
+            null,
+            new Koordinaatti(2, 1),
+            new Koordinaatti(2, 2)
+        };
+        assertArrayEquals(odotetut, oksitut);
+    }
+
+    @Test
+    public void oksiDiagonaalinPakotteetMukana3() {
+        Koordinaatti vanhempi = new Koordinaatti(0, 0);
+        Koordinaatti solmu = new Koordinaatti(1, 1);
+        ruudukko.asetaEste(true, 1, 0);
+        Koordinaatti[] oksitut = jps.oksi(solmu, vanhempi);
+        Koordinaatti[] odotetut = {
+            null,
+            null,
+            null,
+            null,
+            new Koordinaatti(1, 2),
+            new Koordinaatti(2, 0),
+            new Koordinaatti(2, 1),
+            new Koordinaatti(2, 2)
+        };
+        assertArrayEquals(odotetut, oksitut);
+    }
+
+    @Test
+    public void oksiKaanteisDiagonaalinPakotteetMukana() {
+        Koordinaatti vanhempi = new Koordinaatti(2, 2);
+        Koordinaatti solmu = new Koordinaatti(1, 1);
+        ruudukko.asetaEste(true, 1, 2);
+        ruudukko.asetaEste(true, 2, 1);
+        Koordinaatti[] oksitut = jps.oksi(solmu, vanhempi);
+        Koordinaatti[] odotetut = {
+            new Koordinaatti(0, 0),
+            new Koordinaatti(0, 1),
+            new Koordinaatti(0, 2),
+            new Koordinaatti(1, 0),
+            null,
+            new Koordinaatti(2, 0),
+            null,
+            null
+        };
+        assertArrayEquals(odotetut, oksitut);
+    }
+
+    @Test
+    public void oksiKaanteisDiagonaalinPakotteetMukana2() {
+        Koordinaatti vanhempi = new Koordinaatti(2, 2);
+        Koordinaatti solmu = new Koordinaatti(1, 1);
+        ruudukko.asetaEste(true, 2, 1);
+        Koordinaatti[] oksitut = jps.oksi(solmu, vanhempi);
+        Koordinaatti[] odotetut = {
+            new Koordinaatti(0, 0),
+            new Koordinaatti(0, 1),
+            null,
+            new Koordinaatti(1, 0),
+            null,
+            new Koordinaatti(2, 0),
+            null,
+            null
+        };
+        assertArrayEquals(odotetut, oksitut);
+    }
+
+    @Test
+    public void oksiKaanteisDiagonaalinPakotteetMukana3() {
+        Koordinaatti vanhempi = new Koordinaatti(2, 2);
+        Koordinaatti solmu = new Koordinaatti(1, 1);
+        ruudukko.asetaEste(true, 1, 2);
+        Koordinaatti[] oksitut = jps.oksi(solmu, vanhempi);
+        Koordinaatti[] odotetut = {
+            new Koordinaatti(0, 0),
+            new Koordinaatti(0, 1),
+            new Koordinaatti(0, 2),
+            new Koordinaatti(1, 0),
+            null,
+            null,
+            null,
+            null
         };
         assertArrayEquals(odotetut, oksitut);
     }
