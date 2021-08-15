@@ -169,8 +169,56 @@ public class JPS implements Reitinhakija {
         return oksitut;
     }
 
-    private boolean pakotettu(Koordinaatti solmu, Koordinaatti suunta) {
-        // TODO
+    /** Tarkistaa, onko solmulla pakotettuja naapureita
+     *
+     * @param solmu  Tarkasteltava solmu
+     * @param suunta Kulkusuunta, eli
+     *                  (solmu.x - tulosolmu.x, solmu.y - tulosolmu.y)
+     * @return Palauttaa totuusarvon siitä, onko solmulla pakotettuja naapureita
+     */
+    public boolean pakotettujaNaapureita(Koordinaatti solmu, Koordinaatti suunta) {
+        // "nollasuunta" tulee vain ensiaskeleella, eikä silloin karsita naapureita
+        if (null == suunta || (suunta.getX() == 0 && suunta.getY() == 0)) {
+            return false;
+        }
+        if (suunta.getX() != 0 && suunta.getY() != 0) {
+            // diagonaali
+            if (ruudukko.ruutuEstynyt(solmu.getX(), solmu.getY() - suunta.getY())) {
+                if (!ruudukko.ruutuEstynyt(solmu.getX() + suunta.getX(), solmu.getY() - suunta.getY())) {
+                    return true;
+                }
+            }
+            if (ruudukko.ruutuEstynyt(solmu.getX() - suunta.getX(), solmu.getY())) {
+                if (!ruudukko.ruutuEstynyt(solmu.getX() - suunta.getX(), solmu.getY() + suunta.getY())) {
+                    return true;
+                }
+            }
+        } else {
+            // suora
+            if (suunta.getX() != 0) { // vaakasuora
+                if (ruudukko.ruutuEstynyt(solmu.getX(), solmu.getY() - 1)) {
+                    if (!ruudukko.ruutuEstynyt(solmu.getX() + suunta.getX(), solmu.getY() - 1)) {
+                        return true;
+                    }
+                }
+                if (ruudukko.ruutuEstynyt(solmu.getX(), solmu.getY() + 1)) {
+                    if (!ruudukko.ruutuEstynyt(solmu.getX() + suunta.getX(), solmu.getY() + 1)) {
+                        return true;
+                    }
+                }
+            } else { // pystysuora
+                if (ruudukko.ruutuEstynyt(solmu.getX() - 1, solmu.getY())) {
+                    if (!ruudukko.ruutuEstynyt(solmu.getX() - 1, solmu.getY() + suunta.getY())) {
+                        return true;
+                    }
+                }
+                if (ruudukko.ruutuEstynyt(solmu.getX() + 1, solmu.getY())) {
+                    if (!ruudukko.ruutuEstynyt(solmu.getX() + 1, solmu.getY() + suunta.getY())) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -182,7 +230,7 @@ public class JPS implements Reitinhakija {
         if (solmu.equals(maali)) {
             return solmu;
         }
-        if (pakotettu(solmu, suunta)) {
+        if (pakotettujaNaapureita(solmu, suunta)) {
             return solmu;
         }
         if (suunta.getX() != 0 && suunta.getY() != 0) {

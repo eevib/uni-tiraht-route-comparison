@@ -104,6 +104,8 @@ public class JPSTest {
             new Koordinaatti(2, 2)
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(false, jps.pakotettujaNaapureita(solmu, new Koordinaatti(0, 0)));
+        assertEquals(false, jps.pakotettujaNaapureita(solmu, null));
     }
 
     @Test
@@ -122,6 +124,7 @@ public class JPSTest {
             null
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(false, jps.pakotettujaNaapureita(solmu, new Koordinaatti(1, 0)));
     }
 
     @Test
@@ -140,6 +143,7 @@ public class JPSTest {
             null
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(false, jps.pakotettujaNaapureita(solmu, new Koordinaatti(0, 1)));
     }
 
     @Test
@@ -158,6 +162,7 @@ public class JPSTest {
             new Koordinaatti(2, 2)
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(false, jps.pakotettujaNaapureita(solmu, new Koordinaatti(1, 1)));
     }
 
     @Test
@@ -176,6 +181,7 @@ public class JPSTest {
             null
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(false, jps.pakotettujaNaapureita(solmu, new Koordinaatti(-1, -1)));
     }
 
     @Test
@@ -196,6 +202,7 @@ public class JPSTest {
             new Koordinaatti(2, 2)
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(1, 0)));
     }
 
     @Test
@@ -216,6 +223,7 @@ public class JPSTest {
             new Koordinaatti(2, 2)
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(0, 1)));
     }
 
     @Test
@@ -236,6 +244,7 @@ public class JPSTest {
             new Koordinaatti(2, 2)
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(1, 1)));
     }
 
     @Test
@@ -255,6 +264,7 @@ public class JPSTest {
             new Koordinaatti(2, 2)
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(1, 1)));
     }
 
     @Test
@@ -274,6 +284,7 @@ public class JPSTest {
             new Koordinaatti(2, 2)
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(1, 1)));
     }
 
     @Test
@@ -294,6 +305,7 @@ public class JPSTest {
             null
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(-1, -1)));
     }
 
     @Test
@@ -313,6 +325,7 @@ public class JPSTest {
             null
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(-1, -1)));
     }
 
     @Test
@@ -332,5 +345,6 @@ public class JPSTest {
             null
         };
         assertArrayEquals(odotetut, oksitut);
+        assertEquals(true, jps.pakotettujaNaapureita(solmu, new Koordinaatti(-1, -1)));
     }
 }
