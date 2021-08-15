@@ -13,8 +13,8 @@ import java.util.PriorityQueue;
  * <p>Tämän hakualgoritmin varsinainen mielenkiintoinen osuus (oksinta ja hypyt,
  * engl. kirjallisuudessa "pruning" ja "jumping") on mukailtu artikkelista
  *    "Online Graph Pruning for Pathfinding on Grid Maps",
- *       Harabor, Daniel & Grastien, Alban (2011), 25th National Conference on
- *       Artificial Intelligence. AAAI.
+ *       Harabor, Daniel &amp; Grastien, Alban (2011), 25th National Conference
+ *       on Artificial Intelligence. AAAI.
  */
 public class JPS implements Reitinhakija {
     private Ruudukko ruudukko;
