@@ -18,6 +18,7 @@ public class Reitintutkija {
     boolean salliKolot = false;
 
     boolean reitissaKoloja = false;
+    boolean reitissaEpatasapainoisiaHyppyja = false;
     boolean reitissaTormayksia = false;
     boolean reitissaPaallekkaisyyksia = false;
     boolean reittiOhiRuudukosta = false;
@@ -95,6 +96,14 @@ public class Reitintutkija {
                 // laskettujen painojen ynnääminen. Eipä tällä niin väliä ole.
                 reitinPituus += Math.sqrt(dx * dx + dy * dy);
                 reitissaKoloja = true;
+                // Jos hyppy ei ole vaaka- tai pystysuorassa eikä dx == dy, tämä
+                // hyppy on myös epätasapainoinen.
+                if (
+                    (dx != 0 && dy != 0) &&
+                    (dx != dy)
+                ) {
+                    reitissaEpatasapainoisiaHyppyja = true;
+                }
             } else if (dx == 1 && dy == 1) {
                 // Teoriassa saisimme paremman tarkkuuden, jos laskisimme
                 // diagonaalisten siirtojen määrän ja ynnäisimme sen perusteella
@@ -132,6 +141,7 @@ public class Reitintutkija {
     public boolean onkoReitissaOngelmia() {
         return (
             (this.salliKolot ^ this.onkoReitissaKoloja()) ||
+            this.onkoReitissaEpatasapainoisiaHyppyja() ||
             this.onkoReitissaPaallekkaisyyksia() ||
             this.onkoReitissaTormayksia() ||
             this.onkoReittiOhiRuudukosta()
@@ -154,6 +164,25 @@ public class Reitintutkija {
      */
     public boolean onkoReitissaKoloja() {
         return reitissaKoloja;
+    }
+
+    /** Palauttaa totuusarvon siitä, onko reitissä epätasapainoisia hyppyjä.
+     *
+     * Tällä tarkoitetaan sellaisia koloja, jotka eivät ole pysty- tai
+     * vaakasuorassa tai 45 asteen viistossa. Alla esimerkki, jossa on
+     * epätasapainoinen hyppy polulla A-2-3-4-B:
+     * <pre>
+     *   _0_1_2_3_4_5_
+     * 0| A - - - - - |
+     * 1| - 2 - - - - |
+     * 2| - - - 3 - - |
+     * 3| - - - - 4 B |
+     * </pre>
+     *
+     * @return Tosi, jos reitissä on koloja
+     */
+    public boolean onkoReitissaEpatasapainoisiaHyppyja() {
+        return reitissaEpatasapainoisiaHyppyja;
     }
 
     /** Palauttaa totuusarvon siitä, onko reitissä törmäyksiä.
@@ -230,7 +259,10 @@ public class Reitintutkija {
         }
         System.out.println("Reitin pituus on " + this.reitinPituus + ", solmuja " + this.reitissaSolmuja + ".");
         if (this.reitissaKoloja) {
-            System.out.println("Reitissä on koloja. Reitin pituus voi olla erikoinen.");
+            System.out.println("Reitissä on koloja.");
+        }
+        if (this.reitissaEpatasapainoisiaHyppyja) {
+            System.out.println("Reitissä on epätasapainoisia hyppyjä. Reitin pituus voi olla erikoinen.");
         }
         if (this.reitissaTormayksia) {
             System.out.println("Törmäys havaittu! Yllä olevassa kartassa X merkkaa esteen ja reitin yhteentörmäystä samassa ruudussa.");
