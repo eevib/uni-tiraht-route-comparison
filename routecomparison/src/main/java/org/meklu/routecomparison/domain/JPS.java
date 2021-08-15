@@ -97,6 +97,20 @@ public class JPS implements Reitinhakija {
         int vy = vanhempi.getY();
         int dx = sx - vx;
         int dy = sy - vy;
+        do {
+            // normalisoidaan erotus, jotta saadaan kiva suunta
+            // TODO: onkohan tämä oikein tarpeellista ":D"
+            // olisi varmaankin parempi ottaa sisään suunta ja laskea vanhempi
+            // sen perusteella
+            int dmax = Math.max(Math.abs(dx), Math.abs(dy));
+            if (dmax == 0) {
+                break;
+            }
+            dx /= dmax;
+            dy /= dmax;
+            vx = sx - dx;
+            vy = sx - dy;
+        } while (false);
         Koordinaatti naapuri;
         if (dx == 0 || dy == 0) {
             // suora siirto
@@ -348,10 +362,13 @@ public class JPS implements Reitinhakija {
             int nykyinenY = nykyinen.getY();
             avoimissaSolmuissa[nykyinenY][nykyinenX] = false;
 
-            for (int i = 0; i < suunnat.length; ++i) {
-                int naapuriX = nykyinenX + suunnat[i].getX();
-                int naapuriY = nykyinenY + suunnat[i].getY();
-                double paino = suuntienPainot[i];
+            Koordinaatti[] seuraajat = this.seuraajat(nykyinen, tulosuunnat[nykyinenY][nykyinenX], maali);
+            for (int i = 0; i < seuraajat.length; ++i) {
+                int naapuriX = seuraajat[i].getX();
+                int naapuriY = seuraajat[i].getY();
+                int dx = naapuriX - nykyinenX;
+                int dy = naapuriY - nykyinenY;
+                double paino = Math.sqrt(dx * dx + dy * dy);
                 Koordinaatti naapuri = new Koordinaatti(naapuriX, naapuriY);
                 if (this.ruudukko.ruutuEstynyt(naapuriX, naapuriY)) {
                     continue;
