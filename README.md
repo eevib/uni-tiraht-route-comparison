@@ -11,3 +11,4 @@ reitinhakualgoritmien vertailu.
 
 - [Viikkoraportti 1](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/viikkoraportti_1.md)
 - [Viikkoraportti 3](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/viikkoraportti_3.md)
+- [Viikkoraportti 4](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/viikkoraportti_4.md)
