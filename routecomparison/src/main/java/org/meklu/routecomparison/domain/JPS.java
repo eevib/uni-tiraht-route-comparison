@@ -250,7 +250,28 @@ public class JPS implements Reitinhakija {
     private Koordinaatti[] seuraajat(Koordinaatti solmu, Koordinaatti vanhempi, Koordinaatti maali) {
         LinkedList<Koordinaatti> seuraajat = new LinkedList<>();
         Koordinaatti[] naapurit = this.oksi(solmu, vanhempi);
-        return null;
+        Koordinaatti naapuri;
+        for (int i = 0; i < naapurit.length; ++i) {
+            naapuri = naapurit[i];
+            if (null == naapuri) {
+                continue;
+            }
+            naapuri = this.hyppaa(
+                solmu,
+                new Koordinaatti(naapuri.getX() - solmu.getX(), naapuri.getY() - solmu.getY()),
+                maali
+            );
+            if (null != naapuri) {
+                seuraajat.add(naapuri);
+            }
+        }
+        Koordinaatti[] seuraajaTaulukko = new Koordinaatti[seuraajat.size()];
+        int i = 0;
+        for (Koordinaatti s : seuraajat) {
+            seuraajaTaulukko[i] = s;
+            ++i;
+        }
+        return seuraajaTaulukko;
     }
 
     /** Suorittaa JPS-reitinhakualgoritmin asetetussa ruudukossa
