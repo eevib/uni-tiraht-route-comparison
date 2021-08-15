@@ -60,6 +60,9 @@ public class ReitintutkijaTest {
         assertEquals(false, rt.onkoReitissaTormayksia());
         assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
         assertEquals(true, rt.onkoReitissaOngelmia());
+        rt.salliKolot(true);
+        assertEquals(true, rt.onkoReitissaKoloja());
+        assertEquals(false, rt.onkoReitissaOngelmia());
     }
 
     @Test

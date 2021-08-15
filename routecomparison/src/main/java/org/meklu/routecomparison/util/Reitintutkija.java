@@ -15,6 +15,8 @@ public class Reitintutkija {
     private Ruudukko ruudukko;
     private Ruudukko reitti;
 
+    boolean salliKolot = false;
+
     boolean reitissaKoloja = false;
     boolean reitissaTormayksia = false;
     boolean reitissaPaallekkaisyyksia = false;
@@ -37,6 +39,26 @@ public class Reitintutkija {
      */
     public int getReitissaSolmuja() {
         return reitissaSolmuja;
+    }
+
+    /** Palauttaa totuusarvon siitä, ovatko kolot reitissä sallittu.
+     *
+     * <p>Vaikuttaa metodiin {@link #onkoReitissaOngelmia()}.
+     *
+     * @return Ovatko kolot sallittuja
+     */
+    public boolean sallitaankoKolot() {
+        return salliKolot;
+    }
+
+    /** Sallii tai kieltää kolot reitissä.
+     *
+     * <p>Vaikuttaa metodiin {@link #onkoReitissaOngelmia()}.
+     *
+     * @param sallikolot Totuusarvo siitä, halutaanko kolot reitissä sallia
+     */
+    public void salliKolot(boolean sallikolot) {
+        this.salliKolot = sallikolot;
     }
 
     /** Luo reitintutkijan
@@ -109,7 +131,7 @@ public class Reitintutkija {
     @SuppressWarnings("checkstyle:Indentation")
     public boolean onkoReitissaOngelmia() {
         return (
-            this.onkoReitissaKoloja() ||
+            (this.salliKolot ^ this.onkoReitissaKoloja()) ||
             this.onkoReitissaPaallekkaisyyksia() ||
             this.onkoReitissaTormayksia() ||
             this.onkoReittiOhiRuudukosta()
