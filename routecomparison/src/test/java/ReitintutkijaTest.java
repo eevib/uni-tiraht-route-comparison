@@ -122,6 +122,78 @@ public class ReitintutkijaTest {
     }
 
     @Test
+    public void tormaysHavaitaanVaakasuorassaTasapainoisessaHypyssa() {
+        this.ruudukko.asetaEste(true, 1, 1);
+        Koordinaatti[] reitti = new Koordinaatti[2];
+        reitti[0] = new Koordinaatti(0, 1);
+        reitti[1] = new Koordinaatti(3, 1);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        rt.salliKolot(true);
+        assertEquals(2, rt.getReitissaSolmuja());
+        assertEquals(3, rt.getReitinPituus(), 0.0001);
+        assertEquals(true, rt.onkoReitissaKoloja());
+        assertEquals(false, rt.onkoReitissaEpatasapainoisiaHyppyja());
+        assertEquals(false, rt.onkoReittiOhiRuudukosta());
+        assertEquals(true, rt.onkoReitissaTormayksia());
+        assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
+        assertEquals(true, rt.onkoReitissaOngelmia());
+    }
+
+    @Test
+    public void tormaysHavaitaanPystysuorassaTasapainoisessaHypyssa() {
+        this.ruudukko.asetaEste(true, 1, 1);
+        Koordinaatti[] reitti = new Koordinaatti[2];
+        reitti[0] = new Koordinaatti(1, 3);
+        reitti[1] = new Koordinaatti(1, 0);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        rt.salliKolot(true);
+        assertEquals(2, rt.getReitissaSolmuja());
+        assertEquals(3, rt.getReitinPituus(), 0.0001);
+        assertEquals(true, rt.onkoReitissaKoloja());
+        assertEquals(false, rt.onkoReitissaEpatasapainoisiaHyppyja());
+        assertEquals(false, rt.onkoReittiOhiRuudukosta());
+        assertEquals(true, rt.onkoReitissaTormayksia());
+        assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
+        assertEquals(true, rt.onkoReitissaOngelmia());
+    }
+
+    @Test
+    public void tormaysHavaitaanDiagonaalisessaTasapainoisessaHypyssa() {
+        this.ruudukko.asetaEste(true, 1, 1);
+        Koordinaatti[] reitti = new Koordinaatti[2];
+        reitti[0] = new Koordinaatti(0, 0);
+        reitti[1] = new Koordinaatti(3, 3);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        rt.salliKolot(true);
+        assertEquals(2, rt.getReitissaSolmuja());
+        assertEquals(Math.sqrt(3*3 + 3*3), rt.getReitinPituus(), 0.0001);
+        assertEquals(true, rt.onkoReitissaKoloja());
+        assertEquals(false, rt.onkoReitissaEpatasapainoisiaHyppyja());
+        assertEquals(false, rt.onkoReittiOhiRuudukosta());
+        assertEquals(true, rt.onkoReitissaTormayksia());
+        assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
+        assertEquals(true, rt.onkoReitissaOngelmia());
+    }
+
+    @Test
+    public void tormaysHavaitaanKaanteisDiagonaalisessaTasapainoisessaHypyssa() {
+        this.ruudukko.asetaEste(true, 1, 1);
+        Koordinaatti[] reitti = new Koordinaatti[2];
+        reitti[0] = new Koordinaatti(3, 3);
+        reitti[1] = new Koordinaatti(0, 0);
+        Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
+        rt.salliKolot(true);
+        assertEquals(2, rt.getReitissaSolmuja());
+        assertEquals(Math.sqrt(3*3 + 3*3), rt.getReitinPituus(), 0.0001);
+        assertEquals(true, rt.onkoReitissaKoloja());
+        assertEquals(false, rt.onkoReitissaEpatasapainoisiaHyppyja());
+        assertEquals(false, rt.onkoReittiOhiRuudukosta());
+        assertEquals(true, rt.onkoReitissaTormayksia());
+        assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
+        assertEquals(true, rt.onkoReitissaOngelmia());
+    }
+
+    @Test
     public void paallekkaisyysHavaitaan() {
         this.ruudukko.asetaEste(true, 1, 1);
         Koordinaatti[] reitti = new Koordinaatti[4];

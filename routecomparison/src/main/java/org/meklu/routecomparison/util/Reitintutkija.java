@@ -103,6 +103,22 @@ public class Reitintutkija {
                     (dx != dy)
                 ) {
                     reitissaEpatasapainoisiaHyppyja = true;
+                } else {
+                    // Tasapainoisten hyppyjen kohdalla meidän pitää tarkistaa
+                    // törmäykset myös tässä kohdassa, koska myöhemmin
+                    // tarkistetaan vain polun eksplisiittiset solmut.
+                    int suuntaX = (nykyinenX - aiempiX) / Math.max(dx, dy);
+                    int suuntaY = (nykyinenY - aiempiY) / Math.max(dx, dy);
+                    for (
+                        int hyppyX = nykyinenX - suuntaX, hyppyY = nykyinenY - suuntaY;
+                        hyppyX != aiempiX || hyppyY != aiempiY;
+                        hyppyX -= suuntaX, hyppyY -= suuntaY
+                    ) {
+                        if (this.ruudukko.ruutuEstynyt(hyppyX, hyppyY)) {
+                            reitissaTormayksia = true;
+                        }
+                        this.reitti.asetaEste(true, hyppyX, hyppyY);
+                    }
                 }
             } else if (dx == 1 && dy == 1) {
                 // Teoriassa saisimme paremman tarkkuuden, jos laskisimme
