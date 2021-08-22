@@ -369,7 +369,7 @@ public class JPS implements Reitinhakija {
                 int dx = naapuriX - nykyinenX;
                 int dy = naapuriY - nykyinenY;
                 double paino = Math.sqrt(dx * dx + dy * dy);
-                Koordinaatti naapuri = new Koordinaatti(naapuriX, naapuriY);
+                Koordinaatti naapuri = seuraajat[i];
                 if (this.ruudukko.ruutuEstynyt(naapuriX, naapuriY)) {
                     continue;
                 }
