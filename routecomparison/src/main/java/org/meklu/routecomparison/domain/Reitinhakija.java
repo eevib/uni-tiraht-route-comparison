@@ -19,4 +19,9 @@ interface Reitinhakija {
      * @param ruudukko Ruudukko, jossa reittejä tullaan hakemaan
      */
     public void asetaRuudukko(Ruudukko ruudukko);
+    /** Palauttaa reitinhakijaan kuuluvan diagnostiikkainstanssin
+     *
+     * @return Diagnostiikka tälle reitinhakijainstanssille.
+     */
+    public Diagnostiikka getDiagnostiikka();
 }

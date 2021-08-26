@@ -19,6 +19,7 @@ import java.util.PriorityQueue;
 public class JPS implements Reitinhakija {
     private Ruudukko ruudukko;
     private Heuristiikka heuristiikka;
+    private Diagnostiikka diagnostiikka;
     private final double[] suuntienPainot;
     private final Koordinaatti[] suunnat;
 
@@ -298,6 +299,8 @@ public class JPS implements Reitinhakija {
      */
     @Override
     public Koordinaatti[] etsiReitti(int lahtoX, int lahtoY, int maaliX, int maaliY) {
+        this.diagnostiikka = new Diagnostiikka();
+        this.diagnostiikka.aloitaSuoritus();
         // Paetaan sen kummemmitta, mikäli koordinaatit ruudukon ulkopuolella
         if (!this.ruudukko.ruudukonSisalla(maaliX, maaliY) || !this.ruudukko.ruudukonSisalla(lahtoX, lahtoY)) {
             return null;
@@ -354,8 +357,11 @@ public class JPS implements Reitinhakija {
         Koordinaatti nykyinen = null;
 
         while (null != avoimetSolmut.peek()) {
+            this.diagnostiikka.suoritaSykli();
+            this.diagnostiikka.kayRuudussa();
             nykyinen = avoimetSolmut.poll().getB();
             if (nykyinen.equals(maali)) {
+                this.diagnostiikka.paataSuoritus();
                 return this.kokoaReitti(tulosuunnat, nykyinen);
             }
             int nykyinenX = nykyinen.getX();
@@ -385,11 +391,17 @@ public class JPS implements Reitinhakija {
                 }
             }
         }
+        this.diagnostiikka.paataSuoritus();
         return null;
     }
 
     @Override
     public void asetaRuudukko(Ruudukko ruudukko) {
         this.ruudukko = ruudukko;
+    }
+
+    @Override
+    public Diagnostiikka getDiagnostiikka() {
+        return this.diagnostiikka;
     }
 }

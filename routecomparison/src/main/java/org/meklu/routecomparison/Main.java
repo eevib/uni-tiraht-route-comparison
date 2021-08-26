@@ -17,11 +17,13 @@ public class Main {
         System.out.println("=== A*  ===");
         AStar astar = new AStar(ruudukko, heuristiikka);
         Koordinaatti[] reitti = astar.etsiReitti(0, 0, 5, 3);
+        System.out.println(astar.getDiagnostiikka());
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         rt.tulostaTekstina();
         System.out.println("=== JPS ===");
         JPS jps = new JPS(ruudukko, heuristiikka);
         reitti = jps.etsiReitti(0, 0, 5, 3);
+        System.out.println(jps.getDiagnostiikka());
         rt = new Reitintutkija(ruudukko, reitti);
         rt.salliKolot(true);
         rt.tulostaTekstina();
