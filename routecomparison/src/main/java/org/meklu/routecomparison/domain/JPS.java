@@ -364,12 +364,12 @@ public class JPS implements Reitinhakija {
 
             Koordinaatti[] seuraajat = this.seuraajat(nykyinen, tulosuunnat[nykyinenY][nykyinenX], maali);
             for (int i = 0; i < seuraajat.length; ++i) {
-                int naapuriX = seuraajat[i].getX();
-                int naapuriY = seuraajat[i].getY();
+                Koordinaatti naapuri = seuraajat[i];
+                int naapuriX = naapuri.getX();
+                int naapuriY = naapuri.getY();
                 int dx = naapuriX - nykyinenX;
                 int dy = naapuriY - nykyinenY;
                 double paino = Math.sqrt(dx * dx + dy * dy);
-                Koordinaatti naapuri = seuraajat[i];
                 if (this.ruudukko.ruutuEstynyt(naapuriX, naapuriY)) {
                     continue;
                 }
