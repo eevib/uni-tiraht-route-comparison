@@ -49,16 +49,17 @@ public class JPS implements Reitinhakija {
     }
 
     private Koordinaatti[] kokoaReitti(Koordinaatti[][] tulosuunnat, Koordinaatti nykyinen) {
-        LinkedList<Koordinaatti> reitti = new LinkedList<>();
-        while (nykyinen != null) {
-            reitti.addFirst(nykyinen);
-            nykyinen = tulosuunnat[nykyinen.getY()][nykyinen.getX()];
+        Koordinaatti solmu = nykyinen;
+        int reitinPituus = 0;
+        while (solmu != null) {
+            reitinPituus += 1;
+            solmu = tulosuunnat[solmu.getY()][solmu.getX()];
         }
-        Koordinaatti[] reittiTaulukko = new Koordinaatti[reitti.size()];
-        int i = 0;
-        for (Koordinaatti k : reitti) {
-            reittiTaulukko[i] = k;
-            ++i;
+        Koordinaatti[] reittiTaulukko = new Koordinaatti[reitinPituus];
+        solmu = nykyinen;
+        for (int i = 0; i < reittiTaulukko.length && solmu != null; ++i) {
+            reittiTaulukko[reitinPituus - 1 - i] = solmu;
+            solmu = tulosuunnat[solmu.getY()][solmu.getX()];
         }
         return reittiTaulukko;
     }

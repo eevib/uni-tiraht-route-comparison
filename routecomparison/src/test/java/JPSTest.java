@@ -28,6 +28,8 @@ public class JPSTest {
         Koordinaatti[] reitti = jps.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
         assertNotNull(reitti);
         assertEquals(3, reitti.length);
+        assertEquals(true, new Koordinaatti(0, 0).equals(reitti[0]));
+        assertEquals(true, new Koordinaatti(this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1).equals(reitti[reitti.length - 1]));
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         rt.salliKolot(true);
         assertEquals(rt.getReitinPituus(), heuristiikka.lyhinMahdollinenEtaisyys(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1), 0.0001);
@@ -60,6 +62,8 @@ public class JPSTest {
         }
         Koordinaatti[] reitti = jps.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
         assertNotNull(reitti);
+        assertEquals(true, new Koordinaatti(0, 0).equals(reitti[0]));
+        assertEquals(true, new Koordinaatti(this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1).equals(reitti[reitti.length - 1]));
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         rt.salliKolot(true);
         assertEquals(7.4142, rt.getReitinPituus(), 0.0001);
@@ -84,6 +88,8 @@ public class JPSTest {
         }
         Koordinaatti[] reitti = jps.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
         assertNotNull(reitti);
+        assertEquals(true, new Koordinaatti(0, 0).equals(reitti[0]));
+        assertEquals(true, new Koordinaatti(this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1).equals(reitti[reitti.length - 1]));
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         rt.salliKolot(true);
         assertEquals(11.0710, rt.getReitinPituus(), 0.0001);

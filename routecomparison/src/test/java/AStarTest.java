@@ -28,6 +28,8 @@ public class AStarTest {
         Koordinaatti[] reitti = astar.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
         assertNotNull(reitti);
         assertEquals(6, reitti.length);
+        assertEquals(true, new Koordinaatti(0, 0).equals(reitti[0]));
+        assertEquals(true, new Koordinaatti(this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1).equals(reitti[reitti.length - 1]));
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         assertEquals(rt.getReitinPituus(), heuristiikka.lyhinMahdollinenEtaisyys(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1), 0.0001);
         assertEquals(false, rt.onkoReitissaOngelmia());
@@ -59,6 +61,8 @@ public class AStarTest {
         }
         Koordinaatti[] reitti = astar.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
         assertNotNull(reitti);
+        assertEquals(true, new Koordinaatti(0, 0).equals(reitti[0]));
+        assertEquals(true, new Koordinaatti(this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1).equals(reitti[reitti.length - 1]));
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         assertEquals(7.4142, rt.getReitinPituus(), 0.0001);
         assertEquals(8, rt.getReitissaSolmuja());
@@ -82,6 +86,8 @@ public class AStarTest {
         }
         Koordinaatti[] reitti = astar.etsiReitti(0, 0, this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1);
         assertNotNull(reitti);
+        assertEquals(true, new Koordinaatti(0, 0).equals(reitti[0]));
+        assertEquals(true, new Koordinaatti(this.ruudukko.getLeveys() - 1, this.ruudukko.getKorkeus() - 1).equals(reitti[reitti.length - 1]));
         Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
         assertEquals(11.0710, rt.getReitinPituus(), 0.0001);
         assertEquals(10, rt.getReitissaSolmuja());
