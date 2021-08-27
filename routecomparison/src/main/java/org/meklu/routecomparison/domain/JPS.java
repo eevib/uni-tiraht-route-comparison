@@ -20,32 +20,23 @@ public class JPS implements Reitinhakija {
     private Ruudukko ruudukko;
     private Heuristiikka heuristiikka;
     private Diagnostiikka diagnostiikka;
-    private final double[] suuntienPainot;
     private final Koordinaatti[] suunnat;
 
     public JPS(Ruudukko ruudukko, Heuristiikka heuristiikka) {
         this.ruudukko = ruudukko;
         this.heuristiikka = heuristiikka;
 
-        double[] naapurienPainot = new double[8];
         Koordinaatti[] naapurit = new Koordinaatti[8];
-        double diagonaaliPaino = Math.sqrt(2);
         for (int i = 0, x = -1; x <= 1 && i < naapurit.length; ++x) {
             for (int y = -1; y <= 1 && i < naapurit.length; ++y) {
                 if (x == 0 && y == 0) {
                     continue;
-                }
-                if (x != 0 && y != 0) {
-                    naapurienPainot[i] = diagonaaliPaino;
-                } else {
-                    naapurienPainot[i] = 1;
                 }
                 naapurit[i] = new Koordinaatti(x, y);
                 ++i;
             }
         }
         this.suunnat = naapurit;
-        this.suuntienPainot = naapurienPainot;
     }
 
     private Koordinaatti[] kokoaReitti(Koordinaatti[][] tulosuunnat, Koordinaatti nykyinen) {
