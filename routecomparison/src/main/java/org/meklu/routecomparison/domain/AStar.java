@@ -62,40 +62,31 @@ public class AStar implements Reitinhakija {
         avoimetSolmut.add(new Pari<>(0.0, new Koordinaatti(lahtoX, lahtoY)));
         // ja avustava hakutaulu solmujen esiintymiseen edeltävässä tietorakenteessa
         boolean[][] avoimissaSolmuissa = new boolean[this.ruudukko.getKorkeus()][this.ruudukko.getLeveys()];
-        for (int y = 0; y < this.ruudukko.getKorkeus(); ++y) {
-            for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
-                avoimissaSolmuissa[y][x] = false;
-            }
-        }
 
         // Kätevä hakutaulu tulosuunnallemme. Sisältää käsiteltävän polun
         // jokaista koordinaattia (x,y) vastaavan sitä edeltäneen koordinaatin
         // kohdassa tulosuunnat[y][x].
         Koordinaatti[][] tulosuunnat = new Koordinaatti[this.ruudukko.getKorkeus()][this.ruudukko.getLeveys()];
-        for (int y = 0; y < this.ruudukko.getKorkeus(); ++y) {
-            for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
-                tulosuunnat[y][x] = null;
-            }
-        }
 
         // Solmulle (x,y) sisältää kohdassa [y][x] halvimman tähän mennessä
         // tunnetun lähdöstä solmuun (x,y) vievän polun
         double[][] halvinReittiTahan = new double[this.ruudukko.getKorkeus()][this.ruudukko.getLeveys()];
-        for (int y = 0; y < this.ruudukko.getKorkeus(); ++y) {
-            for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
-                halvinReittiTahan[y][x] = Double.POSITIVE_INFINITY;
-            }
-        }
-        halvinReittiTahan[lahtoY][lahtoX] = 0;
 
         // Solmulle (x,y) sisältää arvon halvinReittiTahan[y][x] + heuristiikka(x, y, maaliX, maaliY).
         // Tämä sisältää toisin sanoen nykyisen parhaan hinta-arvion polulle.
         double[][] halvinReittiMaaliin = new double[this.ruudukko.getKorkeus()][this.ruudukko.getLeveys()];
+
+        // Alustetaan edeltävät taulukot
         for (int y = 0; y < this.ruudukko.getKorkeus(); ++y) {
             for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
+                avoimissaSolmuissa[y][x] = false;
+                tulosuunnat[y][x] = null;
+                halvinReittiTahan[y][x] = Double.POSITIVE_INFINITY;
                 halvinReittiMaaliin[y][x] = Double.POSITIVE_INFINITY;
             }
         }
+
+        halvinReittiTahan[lahtoY][lahtoX] = 0;
         halvinReittiMaaliin[lahtoY][lahtoX] = this.heuristiikka.lyhinMahdollinenEtaisyys(lahtoX, lahtoY, maaliX, maaliY);
 
         Koordinaatti maali = new Koordinaatti(maaliX, maaliY);
