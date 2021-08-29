@@ -7,8 +7,9 @@ public class Diagnostiikka {
     private int ruuduissaKayty = 0;
     private int syklejaSuoritettu = 0;
 
-    private long suoritusAloitettu = Long.MIN_VALUE;
-    private long suoritusPaattynyt = Long.MAX_VALUE;
+    private Long suoritusaika = 0L;
+    private Long suoritusAloitettu = null;
+    private Long suoritusPaattynyt = null;
 
     /** Inkrementoi käytyjen ruutujen laskuria
      */
@@ -42,12 +43,19 @@ public class Diagnostiikka {
      */
     public void aloitaSuoritus() {
         this.suoritusAloitettu = System.nanoTime();
+        this.suoritusPaattynyt = null;
     }
 
-    /** Asettaa suorituksen päättymisajan
+    /** Asettaa suorituksen päättymisajan ja lisää erotuksen suoritusaikaan
      */
     public void paataSuoritus() {
+        if (null == this.suoritusAloitettu) {
+            return;
+        }
         this.suoritusPaattynyt = System.nanoTime();
+        this.suoritusaika += this.suoritusPaattynyt - this.suoritusAloitettu;
+        this.suoritusAloitettu = null;
+        this.suoritusPaattynyt = null;
     }
 
     /** Palauttaa suoritusajan nanosekunteina
@@ -55,7 +63,7 @@ public class Diagnostiikka {
      * @return Suoritusaika nanosekunteina.
      */
     public long getSuoritusaikaNs() {
-        return suoritusPaattynyt - suoritusAloitettu;
+        return suoritusaika;
     }
 
     /** Palauttaa suoritusajan sekunteina.
