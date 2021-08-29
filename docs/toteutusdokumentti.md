@@ -14,3 +14,10 @@ tarkistamiseen ja on kykenevä myös reittien tekstimuotoiseen visualisoitiin.
 ## Toteutetut algoritmit
 
 Toteutetut algoritmit ovat Jump Point Search (JPS) ja A\*.
+
+## Puutteita ja parannusehdotuksia
+
+- Käyttöliittymä ei ole vielä interaktiivinen
+- Algoritmit eivät ole vielä vaiheisiin purettuja, joten vaiheittainen
+  visualisointi ei ole vielä mahdollista
+- Tällä hetkellä ohjelmalla ei ole ruudukkotiedostojen lukumahdollisuutta
