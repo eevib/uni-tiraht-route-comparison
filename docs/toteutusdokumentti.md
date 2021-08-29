@@ -10,3 +10,7 @@ Reitinhakijoiden suoritusdetaljien vertailua varten on kehitetty luokka
 syklimäärää. Reitinhakijoiden tuottamien reittien tutkimista varten on
 kehitetty luokka `Reitintutkija`. Tämä on hyödyllinen reitin oikeellisuuden
 tarkistamiseen ja on kykenevä myös reittien tekstimuotoiseen visualisoitiin.
+
+## Toteutetut algoritmit
+
+Toteutetut algoritmit ovat Jump Point Search (JPS) ja A\*.

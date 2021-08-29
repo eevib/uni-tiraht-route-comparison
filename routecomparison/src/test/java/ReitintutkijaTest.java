@@ -61,7 +61,9 @@ public class ReitintutkijaTest {
         assertEquals(false, rt.onkoReitissaTormayksia());
         assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
         assertEquals(true, rt.onkoReitissaOngelmia());
+        assertEquals(false, rt.sallitaankoKolot());
         rt.salliKolot(true);
+        assertEquals(true, rt.sallitaankoKolot());
         assertEquals(true, rt.onkoReitissaKoloja());
         assertEquals(false, rt.onkoReitissaOngelmia());
     }
@@ -82,7 +84,9 @@ public class ReitintutkijaTest {
         assertEquals(false, rt.onkoReitissaTormayksia());
         assertEquals(false, rt.onkoReitissaPaallekkaisyyksia());
         assertEquals(true, rt.onkoReitissaOngelmia());
+        assertEquals(false, rt.sallitaankoKolot());
         rt.salliKolot(true);
+        assertEquals(true, rt.sallitaankoKolot());
         assertEquals(true, rt.onkoReitissaOngelmia());
     }
 
