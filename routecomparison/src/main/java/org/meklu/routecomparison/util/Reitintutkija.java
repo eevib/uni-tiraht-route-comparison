@@ -98,10 +98,7 @@ public class Reitintutkija {
                 reitissaKoloja = true;
                 // Jos hyppy ei ole vaaka- tai pystysuorassa eikä dx == dy, tämä
                 // hyppy on myös epätasapainoinen.
-                if (
-                    (dx != 0 && dy != 0) &&
-                    (dx != dy)
-                ) {
+                if (dx != 0 && dy != 0 && dx != dy) {
                     reitissaEpatasapainoisiaHyppyja = true;
                 } else {
                     // Tasapainoisten hyppyjen kohdalla meidän pitää tarkistaa
