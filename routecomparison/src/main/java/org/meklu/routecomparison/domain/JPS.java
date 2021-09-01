@@ -103,8 +103,9 @@ public class JPS implements Reitinhakija {
             }
             dx /= dmax;
             dy /= dmax;
+            // lasketaan myös välitön vanhempi
             vx = sx - dx;
-            vy = sx - dy;
+            vy = sy - dy;
         } while (false);
         Koordinaatti naapuri;
         if (dx == 0 || dy == 0) {
@@ -292,6 +293,7 @@ public class JPS implements Reitinhakija {
         this.diagnostiikka.aloitaSuoritus();
 
         this.nykyinen = null;
+        this.tulos = null;
         this.lahto = new Koordinaatti(lahtoX, lahtoY);
         this.maali = new Koordinaatti(maaliX, maaliY);
         this.valmis = false;
@@ -367,7 +369,6 @@ public class JPS implements Reitinhakija {
         this.diagnostiikka.aloitaSuoritus();
         if (null == avoimetSolmut.peek()) {
             this.valmis = true;
-            this.nykyinen = null;
             this.diagnostiikka.paataSuoritus();
             return;
         }

@@ -77,6 +77,7 @@ public class AStar implements Reitinhakija {
         this.diagnostiikka.aloitaSuoritus();
 
         this.nykyinen = null;
+        this.tulos = null;
         this.lahto = new Koordinaatti(lahtoX, lahtoY);
         this.maali = new Koordinaatti(maaliX, maaliY);
         this.valmis = false;
@@ -152,7 +153,6 @@ public class AStar implements Reitinhakija {
         this.diagnostiikka.aloitaSuoritus();
         if (null == avoimetSolmut.peek()) {
             this.valmis = true;
-            this.nykyinen = null;
             this.diagnostiikka.paataSuoritus();
             return;
         }

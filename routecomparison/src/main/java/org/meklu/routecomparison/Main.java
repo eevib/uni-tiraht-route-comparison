@@ -10,7 +10,7 @@ public class Main {
         System.out.println(new java.io.File(".").getCanonicalPath());
 
         if (0 == args.length) {
-            args = new String[] { "./thrc/foo.thrc", "./thrc/bar.thrc" };
+            args = new String[] { "./thrc/foo.thrc", "./thrc/bar.thrc", "./thrc/zot.thrc" };
         }
 
         for (String tiedostoNimi : args) {
