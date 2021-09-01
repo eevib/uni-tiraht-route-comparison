@@ -1,7 +1,6 @@
 
 package org.meklu.routecomparison.domain;
 
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 /** Toteuttaa Jump Point Search -reitinhakualgoritmin.
@@ -258,7 +257,6 @@ public class JPS implements Reitinhakija {
     }
 
     private Koordinaatti[] seuraajat(Koordinaatti solmu, Koordinaatti vanhempi, Koordinaatti maali) {
-        LinkedList<Koordinaatti> seuraajat = new LinkedList<>();
         Koordinaatti[] naapurit = this.oksi(solmu, vanhempi);
         Koordinaatti naapuri;
         for (int i = 0; i < naapurit.length; ++i) {
@@ -266,22 +264,13 @@ public class JPS implements Reitinhakija {
             if (null == naapuri) {
                 continue;
             }
-            naapuri = this.hyppaa(
+            naapurit[i] = this.hyppaa(
                 solmu,
                 new Koordinaatti(naapuri.getX() - solmu.getX(), naapuri.getY() - solmu.getY()),
                 maali
             );
-            if (null != naapuri) {
-                seuraajat.add(naapuri);
-            }
         }
-        Koordinaatti[] seuraajaTaulukko = new Koordinaatti[seuraajat.size()];
-        int i = 0;
-        for (Koordinaatti s : seuraajat) {
-            seuraajaTaulukko[i] = s;
-            ++i;
-        }
-        return seuraajaTaulukko;
+        return naapurit;
     }
 
     private boolean valmis = false;
@@ -399,6 +388,9 @@ public class JPS implements Reitinhakija {
         Koordinaatti[] seuraajat = this.seuraajat(nykyinen, tulosuunnat[nykyinenY][nykyinenX], maali);
         for (int i = 0; i < seuraajat.length; ++i) {
             Koordinaatti naapuri = seuraajat[i];
+            if (null == naapuri) {
+                continue;
+            }
             int naapuriX = naapuri.getX();
             int naapuriY = naapuri.getY();
             int dx = naapuriX - nykyinenX;
