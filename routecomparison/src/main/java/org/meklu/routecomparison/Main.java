@@ -6,13 +6,12 @@ import org.meklu.routecomparison.util.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Ruudukko ruudukko = new Ruudukko(6, 4);
-        for (int y = 0; y < ruudukko.getKorkeus() - 1; ++y) {
-            ruudukko.asetaEste(true, 1, y);
-        }
-        for (int y = 1; y < ruudukko.getKorkeus(); ++y) {
-            ruudukko.asetaEste(true, 3, y);
-        }
+        System.out.print("Nykyinen hakemisto: ");
+        System.out.println(new java.io.File(".").getCanonicalPath());
+
+        ASCIILukija lukija = new ASCIILukija(new java.util.Scanner(new java.io.File("./thrc/bar.thrc")));
+        Ruudukko ruudukko = lukija.lue();
+
         Heuristiikka heuristiikka = new Heuristiikka();
         System.out.println("=== A*  ===");
         AStar astar = new AStar(ruudukko, heuristiikka);
