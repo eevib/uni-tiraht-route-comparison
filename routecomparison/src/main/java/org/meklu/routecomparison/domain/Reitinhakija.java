@@ -3,7 +3,7 @@ package org.meklu.routecomparison.domain;
 
 /** Rajapinta reitinhakualgoritmille käyttöliittymää varten.
  */
-interface Reitinhakija {
+public interface Reitinhakija {
     /** Tekee reitinhaun ruudukossa pisteiden A ja B välillä alusta loppuun
      *
      * @param ax A-pisteen x-koordinaatti
@@ -24,26 +24,26 @@ interface Reitinhakija {
      * @param bx B-pisteen x-koordinaatti
      * @param by B-pisteen y-koordinaatti
      *
-     * @see {@link #suoritaSykli()}
-     * @see {@link #onkoValmis()}
-     * @see {@link #keraaTulos()}
-     * @see {@link #keraaNykyinenReitti()}
+     * @see #suoritaSykli()
+     * @see #onkoValmis()
+     * @see #keraaTulos()
+     * @see #keraaNykyinenReitti()
      */
     public void alusta(int ax, int ay, int bx, int by);
     /** Suorittaa yhden syklin vaiheittain suoritettavaa reitinhakua.
      *
-     * @see {@link #alusta()}
-     * @see {@link #onkoValmis()}
-     * @see {@link #keraaTulos()}
+     * @see #alusta(int, int, int, int)
+     * @see #onkoValmis()
+     * @see #keraaTulos()
      */
     public void suoritaSykli();
     /** Tarkistaa, onko vaiheittain suoritettava reitinhaku valmis.
      *
      * @return Totuusarvo siitä, onko vaiheittain suoritettava reitinhaku valmis
      *
-     * @see {@link #alusta()}
-     * @see {@link #suoritaSykli()}
-     * @see {@link #keraaTulos()}
+     * @see #alusta(int, int, int, int)
+     * @see #suoritaSykli()
+     * @see #keraaTulos()
      */
     public boolean onkoValmis();
     /** Kerää vaiheittain suoritettavan reitinhaun tuottaman reitin.
@@ -51,10 +51,10 @@ interface Reitinhakija {
      * @return   Taulukko, joka sisältää löytyneen reitin solmujen koordinaatit
      *           järjestyksessä A:sta B:hen tai null
      *
-     * @see {@link #alusta()}
-     * @see {@link #suoritaSykli()}
-     * @see {@link #onkoValmis()}
-     * @see {@link #keraaNykyinenReitti()}
+     * @see #alusta(int, int, int, int)
+     * @see #suoritaSykli()
+     * @see #onkoValmis()
+     * @see #keraaNykyinenReitti()
      */
     public Koordinaatti[] keraaTulos();
     /** Kerää reitinhakijan tällä hetkellä arvioitavan reitin.
@@ -63,10 +63,10 @@ interface Reitinhakija {
      *
      * @return Taulukko reitin sisältämiä koordinaatteja
      *
-     * @see {@link #alusta()}
-     * @see {@link #suoritaSykli()}
-     * @see {@link #onkoValmis()}
-     * @see {@link #keraaTulos()}
+     * @see #alusta(int, int, int, int)
+     * @see #suoritaSykli()
+     * @see #onkoValmis()
+     * @see #keraaTulos()
      */
     public Koordinaatti[] keraaNykyinenReitti();
     /** Asettaa reitinhakijan käyttämän ruudukon.
