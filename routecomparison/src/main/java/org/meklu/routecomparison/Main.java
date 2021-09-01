@@ -14,11 +14,20 @@ public class Main {
         }
 
         for (String tiedostoNimi : args) {
-            ASCIILukija lukija = new ASCIILukija(new java.util.Scanner(new java.io.File(tiedostoNimi)));
-            Ruudukko ruudukko = lukija.lue();
+            ASCIILukija lukija;
+            Ruudukko ruudukko = null;
+            try {
+                lukija = new ASCIILukija(new java.util.Scanner(new java.io.File(tiedostoNimi)));
+                ruudukko = lukija.lue();
+            } catch (Exception e) {
+            }
             if (null != ruudukko) {
                 System.out.println("Luettiin ruudukko tiedostosta `" + tiedostoNimi + "'.");
                 System.out.println();
+            } else {
+                System.out.println("Lukiessa ruudukkoa tiedostosta `" + tiedostoNimi + "' sattui virhe.");
+                System.out.println();
+                continue;
             }
 
             Heuristiikka heuristiikka = new Heuristiikka();
