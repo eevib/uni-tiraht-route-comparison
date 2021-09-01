@@ -46,8 +46,8 @@ package org.meklu.routecomparison.domain;
  * abs(5 - 3) = 2.
  *
  * <p>Geometrinen etäisyys A-4 voidaan laskea ottamalla x- ja y-koordinaattien
- * erotuksista pienempi, eli min(5, 3) = 3 ja sijoittamalla se
- * Pythagoraan lauseen muuttujiin a ja b.
+ * erotuksista pienempi, eli min(5, 3) = 3 ja sijoittamalla se Pythagoraan
+ * lauseen muuttujiin a ja b.
  * <pre>
  *    c = sqrt(3^2 + 3^2)
  *    c = sqrt(9 + 9)
