@@ -31,13 +31,17 @@ public class Main {
             }
 
             Heuristiikka heuristiikka = new Heuristiikka();
-            Pari<String, Reitinhakija>[] reitinhakijat = {
-                new Pari<>("=== A*  ===", new AStar(ruudukko, heuristiikka)),
-                new Pari<>("=== JPS ===", new JPS(ruudukko, heuristiikka))
+            Reitinhakija[] reitinhakijat = {
+                new AStar(ruudukko, heuristiikka),
+                new JPS(ruudukko, heuristiikka)
+            };
+            String[] otsikot = {
+                "=== A*  ===",
+                "=== JPS ==="
             };
             for (int i = 0; i < reitinhakijat.length; ++i) {
-                String otsikko = reitinhakijat[i].getA();
-                Reitinhakija rh = reitinhakijat[i].getB();
+                String otsikko = otsikot[i];
+                Reitinhakija rh = reitinhakijat[i];
                 System.out.println(otsikko);
                 Koordinaatti[] reitti = rh.etsiReitti(0, 0, ruudukko.getLeveys() - 1, ruudukko.getKorkeus() - 1);
                 System.out.println(rh.getDiagnostiikka());
