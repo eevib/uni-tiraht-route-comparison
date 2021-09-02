@@ -10,15 +10,21 @@ public class Main {
         System.out.println(new java.io.File(".").getCanonicalPath());
 
         if (0 == args.length) {
-            args = new String[] { "./thrc/foo.thrc", "./thrc/bar.thrc", "./thrc/zot.thrc" };
+            args = new String[] { "-random" };
         }
 
         for (String tiedostoNimi : args) {
             ASCIILukija lukija;
+            SatunnaisRuudukko satunnaisruudukko;
             Ruudukko ruudukko = null;
             try {
-                lukija = new ASCIILukija(new java.util.Scanner(new java.io.File(tiedostoNimi)));
-                ruudukko = lukija.lue();
+                if (tiedostoNimi.startsWith("-random")) {
+                    satunnaisruudukko = new SatunnaisRuudukko(100, 100);
+                    ruudukko = satunnaisruudukko.generoi(3, 8);
+                } else {
+                    lukija = new ASCIILukija(new java.util.Scanner(new java.io.File(tiedostoNimi)));
+                    ruudukko = lukija.lue();
+                }
             } catch (Exception e) {
             }
             if (null != ruudukko) {

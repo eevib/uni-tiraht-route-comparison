@@ -84,7 +84,8 @@ public class AStar implements Reitinhakija {
         this.valmis = false;
 
         // Paetaan sen kummemmitta, mikäli koordinaatit ruudukon ulkopuolella
-        if (!this.ruudukko.ruudukonSisalla(maaliX, maaliY) || !this.ruudukko.ruudukonSisalla(lahtoX, lahtoY)) {
+        // tai ruudut ovat muutoin estyneet
+        if (this.ruudukko.ruutuEstynyt(maaliX, maaliY) || this.ruudukko.ruutuEstynyt(lahtoX, lahtoY)) {
             this.valmis = true;
             this.diagnostiikka.paataSuoritus();
             return;
