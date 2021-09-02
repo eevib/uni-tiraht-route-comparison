@@ -1,5 +1,6 @@
 
 import org.meklu.routecomparison.domain.Diagnostiikka;
+import org.meklu.routecomparison.domain.Koordinaatti;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +12,7 @@ public class DiagnostiikkaTest {
 
     @Before
     public void setUp() {
-        this.diagnostiikka = new Diagnostiikka();
+        this.diagnostiikka = new Diagnostiikka(null);
     }
 
     @After
@@ -64,10 +65,11 @@ public class DiagnostiikkaTest {
 
     @Test
     public void ruudutLisaantyvat() {
-        this.diagnostiikka.kayRuudussa();
+        Koordinaatti k = new Koordinaatti(0, 0);
+        this.diagnostiikka.kayRuudussa(k);
         assertEquals(1, this.diagnostiikka.getRuuduissaKayty());
         for (int i = 0; i < 10; ++i) {
-            this.diagnostiikka.kayRuudussa();
+            this.diagnostiikka.kayRuudussa(k);
         }
         assertEquals(11, this.diagnostiikka.getRuuduissaKayty());
     }

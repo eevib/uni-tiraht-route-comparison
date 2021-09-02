@@ -1,6 +1,8 @@
 
 package org.meklu.routecomparison.domain;
 
+import org.meklu.routecomparison.util.Reitintutkija;
+
 /** Rajapinta reitinhakualgoritmille käyttöliittymää varten.
  */
 public interface Reitinhakija {
@@ -76,9 +78,19 @@ public interface Reitinhakija {
      * @param ruudukko Ruudukko, jossa reittejä tullaan hakemaan
      */
     public void asetaRuudukko(Ruudukko ruudukko);
+    /** Palauttaa reitinhakijaan tällä hetkellä kuuluvan ruudukon
+     *
+     * @return Ruudukko tälle reitinhakijainstanssille.
+     */
+    public Ruudukko getRuudukko();
     /** Palauttaa reitinhakijaan kuuluvan diagnostiikkainstanssin
      *
      * @return Diagnostiikka tälle reitinhakijainstanssille.
      */
     public Diagnostiikka getDiagnostiikka();
+    /** Konfiguroi reitintutkijan tälle reitinhakijalle
+     *
+     * @param rt Reitintutkija, jota aiotaan käyttää tämän reitinhakijan kanssa
+     */
+    public void konfiguroiReitintutkija(Reitintutkija rt);
 }

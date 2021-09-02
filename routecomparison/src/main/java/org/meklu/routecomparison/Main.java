@@ -31,19 +31,18 @@ public class Main {
             }
 
             Heuristiikka heuristiikka = new Heuristiikka();
-            System.out.println("=== A*  ===");
-            AStar astar = new AStar(ruudukko, heuristiikka);
-            Koordinaatti[] reitti = astar.etsiReitti(0, 0, ruudukko.getLeveys() - 1, ruudukko.getKorkeus() - 1);
-            System.out.println(astar.getDiagnostiikka());
-            Reitintutkija rt = new Reitintutkija(ruudukko, reitti);
-            rt.tulostaTekstina();
-            System.out.println("=== JPS ===");
-            JPS jps = new JPS(ruudukko, heuristiikka);
-            reitti = jps.etsiReitti(0, 0, ruudukko.getLeveys() - 1, ruudukko.getKorkeus() - 1);
-            System.out.println(jps.getDiagnostiikka());
-            rt = new Reitintutkija(ruudukko, reitti);
-            rt.salliKolot(true);
-            rt.tulostaTekstina();
+            Pari<String, Reitinhakija>[] reitinhakijat = {
+                new Pari<>("=== A*  ===", new AStar(ruudukko, heuristiikka)),
+                new Pari<>("=== JPS ===", new JPS(ruudukko, heuristiikka))
+            };
+            for (int i = 0; i < reitinhakijat.length; ++i) {
+                String otsikko = reitinhakijat[i].getA();
+                Reitinhakija rh = reitinhakijat[i].getB();
+                System.out.println(otsikko);
+                Koordinaatti[] reitti = rh.etsiReitti(0, 0, ruudukko.getLeveys() - 1, ruudukko.getKorkeus() - 1);
+                System.out.println(rh.getDiagnostiikka());
+                rh.getDiagnostiikka().getReitintutkija().tulostaTekstina();
+            }
         }
     }
 }

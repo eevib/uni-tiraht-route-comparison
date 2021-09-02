@@ -2,6 +2,7 @@
 package org.meklu.routecomparison.domain;
 
 import java.util.PriorityQueue;
+import org.meklu.routecomparison.util.Reitintutkija;
 
 /** Toteuttaa A* -reitinhakualgoritmin
  *
@@ -73,7 +74,7 @@ public class AStar implements Reitinhakija {
 
     @Override
     public void alusta(int lahtoX, int lahtoY, int maaliX, int maaliY) {
-        this.diagnostiikka = new Diagnostiikka();
+        this.diagnostiikka = new Diagnostiikka(this);
         this.diagnostiikka.aloitaSuoritus();
 
         this.nykyinen = null;
@@ -142,7 +143,9 @@ public class AStar implements Reitinhakija {
 
     @Override
     public Koordinaatti[] keraaTulos() {
-        return this.kokoaReitti(this.tulos);
+        Koordinaatti[] reitti = this.kokoaReitti(this.tulos);
+        this.diagnostiikka.asetaTulos(reitti);
+        return reitti;
     }
 
     @Override
@@ -157,8 +160,8 @@ public class AStar implements Reitinhakija {
             return;
         }
         this.diagnostiikka.suoritaSykli();
-        this.diagnostiikka.kayRuudussa();
         nykyinen = avoimetSolmut.poll().getB();
+        this.diagnostiikka.kayRuudussa(nykyinen);
         if (nykyinen.equals(maali)) {
             this.tulos = nykyinen;
             this.diagnostiikka.paataSuoritus();
@@ -218,5 +221,15 @@ public class AStar implements Reitinhakija {
     @Override
     public Diagnostiikka getDiagnostiikka() {
         return this.diagnostiikka;
+    }
+
+    @Override
+    public Ruudukko getRuudukko() {
+        return this.ruudukko;
+    }
+
+    @Override
+    public void konfiguroiReitintutkija(Reitintutkija rt) {
+        // A* ei tarvitse erikoisuuksia
     }
 }
