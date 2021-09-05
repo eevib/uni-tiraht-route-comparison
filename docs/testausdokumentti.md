@@ -28,3 +28,7 @@ Ohjelman voi kääntää ajamalla repositorion juurihakemistosta löytyvässä
 
 Ohjelman voi suorittaa kääntämisen jälkeen samaisessa hakemistossa komennolla
 `java -jar target/RouteComparison-1.0-SNAPSHOT.jar`
+
+## Suorituskykyvertailun tulokset
+
+TODO

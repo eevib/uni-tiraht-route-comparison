@@ -5,6 +5,7 @@ reitinhakualgoritmien vertailu.
 
 ## Dokumentaatio
 
+- [Käyttöohje](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/k%C3%A4ytt%C3%B6ohje.md)
 - [Määrittelydokumentti](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/m%C3%A4%C3%A4rittelydokumentti.md)
 - [Testausdokumentti](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/testausdokumentti.md)
 - [Toteutusdokumentti](https://github.com/meklu/uni-tiraht-route-comparison/blob/master/docs/toteutusdokumentti.md)
