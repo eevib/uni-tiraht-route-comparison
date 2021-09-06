@@ -6,6 +6,11 @@ import org.meklu.routecomparison.util.Reitintutkija;
 /** Rajapinta reitinhakualgoritmille käyttöliittymää varten.
  */
 public interface Reitinhakija {
+    /** Palauttaa reitinhakijan toteuttaman reitinhakualgoritmin nimen
+     *
+     * @return Reitinhakualgoritmin nimi
+     */
+    public String nimi();
     /** Tekee reitinhaun ruudukossa pisteiden A ja B välillä alusta loppuun
      *
      * @param ax A-pisteen x-koordinaatti

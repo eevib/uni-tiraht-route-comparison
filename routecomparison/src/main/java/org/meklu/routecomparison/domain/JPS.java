@@ -312,6 +312,7 @@ public class JPS implements Reitinhakija {
         // täsmäävän solmun paras hinta-arvio.
         this.avoimetSolmut =
                 new PriorityQueue<>(
+                    this.ruudukko.getLeveys() * this.ruudukko.getKorkeus(),
                     (pA, pB) -> pA.getA().compareTo(pB.getA())
                 );
         // aluksi sisältää vain lähtösolmun
@@ -454,5 +455,10 @@ public class JPS implements Reitinhakija {
     public void konfiguroiReitintutkija(Reitintutkija rt) {
         // JPS:ää tutkiessa täytyy sallia kolot
         rt.salliKolot(true);
+    }
+
+    @Override
+    public String nimi() {
+        return "JPS";
     }
 }

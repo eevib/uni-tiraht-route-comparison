@@ -96,6 +96,7 @@ public class AStar implements Reitinhakija {
         // täsmäävän solmun paras hinta-arvio.
         this.avoimetSolmut =
                 new PriorityQueue<>(
+                    this.ruudukko.getLeveys() * this.ruudukko.getKorkeus(),
                     (pA, pB) -> pA.getA().compareTo(pB.getA())
                 );
         // aluksi sisältää vain lähtösolmun
@@ -232,5 +233,10 @@ public class AStar implements Reitinhakija {
     @Override
     public void konfiguroiReitintutkija(Reitintutkija rt) {
         // A* ei tarvitse erikoisuuksia
+    }
+
+    @Override
+    public String nimi() {
+        return "A*";
     }
 }
