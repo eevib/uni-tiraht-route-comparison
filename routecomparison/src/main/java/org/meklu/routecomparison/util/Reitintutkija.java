@@ -14,6 +14,7 @@ public class Reitintutkija {
     private final static double SUORAPAINO = 1;
     private Ruudukko ruudukko;
     private Ruudukko reitti;
+    private Ruudukko hypyt;
 
     boolean salliKolot = false;
 
@@ -71,13 +72,16 @@ public class Reitintutkija {
         this.ruudukko = ruudukko;
         try {
             this.reitti = new Ruudukko(ruudukko.getLeveys(), ruudukko.getKorkeus());
+            this.hypyt = new Ruudukko(ruudukko.getLeveys(), ruudukko.getKorkeus());
         } catch (Exception ex) {
             System.out.println("Hupsista keikkaa.");
             this.reitti = null;
+            this.hypyt = null;
             return;
         }
         if (reitti == null) {
             this.reitti = null;
+            this.hypyt = null;
             return;
         }
         this.reitissaSolmuja = reitti.length;
@@ -115,6 +119,7 @@ public class Reitintutkija {
                             reitissaTormayksia = true;
                         }
                         this.reitti.asetaEste(true, hyppyX, hyppyY);
+                        this.hypyt.asetaEste(true, hyppyX, hyppyY);
                     }
                 }
             } else if (dx == 1 && dy == 1) {
@@ -232,6 +237,7 @@ public class Reitintutkija {
      * <p>Alla selitteet ruudukossa mahdollisesti esiintyville merkeille:
      * <pre>
      *    {@literal @} : reitti kulkee tämän ruudun kautta
+     *    ! : reitti kulkee tämän ruudun kautta hyppäämällä
      *    * : tässä ruudussa on este
      *    - : tyhjä ruutu
      *    X : reitti on törmännyt esteeseen
@@ -245,10 +251,13 @@ public class Reitintutkija {
             for (int x = 0; x < this.ruudukko.getLeveys(); ++x) {
                 boolean este = this.ruudukko.ruutuEstynyt(x, y);
                 boolean askel = (this.reitti != null) && this.reitti.ruutuEstynyt(x, y);
+                boolean hyppy = (this.hypyt != null) && this.hypyt.ruutuEstynyt(x, y);
                 if (este && askel) {
                     kartta += " X";
                 } else if (este) {
                     kartta += " *";
+                } else if (hyppy) {
+                    kartta += " !";
                 } else if (askel) {
                     kartta += " @";
                 } else {
