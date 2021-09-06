@@ -17,7 +17,7 @@ public class SatunnaisRuudukko {
     }
 
     public Ruudukko generoi(int luku, int jakaja) {
-        luku = Math.max(1, luku);
+        luku = Math.max(0, luku);
         jakaja = Math.max(1, jakaja);
         Ruudukko ruudukko;
         try {

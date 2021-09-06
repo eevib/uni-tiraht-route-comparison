@@ -33,6 +33,20 @@ public class KoordinaattiTest {
     }
 
     @Test
+    public void yhtasuuretYhtasuuria() {
+        assertEquals(true, this.koordinaatti.equals(this.koordinaatti));
+        assertEquals(true, this.koordinaatti.equals(new Koordinaatti(this.koordinaatti.getX(), this.koordinaatti.getY())));
+    }
+
+    @Test
+    public void eriavatEriavia() {
+        assertEquals(false, this.koordinaatti.equals(null));
+        assertEquals(false, this.koordinaatti.equals(new Koordinaatti(this.koordinaatti.getX() + 1, this.koordinaatti.getY())));
+        assertEquals(false, this.koordinaatti.equals(new Koordinaatti(this.koordinaatti.getX() + 1, this.koordinaatti.getY() - 1)));
+        assertEquals(false, this.koordinaatti.equals(new Koordinaatti(this.koordinaatti.getX(), this.koordinaatti.getY() - 1)));
+    }
+
+    @Test
     public void merkkijonoEsitysOnKelpo() {
         assertEquals("(" + this.koordinaatti.getX() + "," + this.koordinaatti.getY() + ")", this.koordinaatti.toString());
     }
