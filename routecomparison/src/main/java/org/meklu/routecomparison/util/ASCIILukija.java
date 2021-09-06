@@ -8,13 +8,56 @@ import java.util.Scanner;
 
 /** Lukee ruudukon ASCII-muotoisesta tiedostosta.
  *
- * TODO: kuvaile tiedostomuoto
+ * <p>Tiedostomuoto on kirjainkokoriippuvainen.
+ *
+ * <p>Tiedoston otsakerivi koostuu "thrc" -etuliitteestä ja vapaan ja estyneen
+ * ruudun merkeistä. Alla olevassa esimerkissä vapaan ruudun merkiksi on
+ * asetettu merkki '0' ja estyneen ruudun merkiksi '1'. Tyhjät merkit ovat
+ * vapaaehtoisia. Ruudukon koko on 4x3 ja siinä on este koordinaateissa (1, 2).
+ * <pre>
+ *    thrc 0 1
+ *     0 0 0 0
+ *     0 0 0 0
+ *     0 1 0 0
+ * </pre>
+ *
+ * <p>Tiedoston otsakkeessa voi määriteltyjen ruutumerkkien jälleen olla mitä
+ * tahansa sisältöä, koska sen lukeminen lopetetaan estyneen ruudun merkin
+ * jälkeen.
+ * <pre>
+ *    thrc a b Tämä sisältö voi olla esimerkiksi jokin hyödyllinen kommentti.
+ *    a a a a
+ *    a b b a
+ * </pre>
+ *
+ * <p>Tiedoston ensimmäinen otsakkeen jälkeinen rivi määrittelee ruudukon
+ * leveyden. Kaikki otsakkeessa määriteltyyn merkistöön kuulumattomat merkit
+ * jätetään huomiotta.
+ * <pre>
+ *    thrc # X
+ *     # # # #    Leveys on 4
+ *    x#y#z#w#    Huhhels, tyhjä rivi
+ *    -#-#-#-#-X  Tämän rivin X-merkkiä ei lasketa ruudukkoon
+ * </pre>
+ *
+ * <p>Alimääritellyt rivit käsitellään oikealla olevana tyhjänä tilana
+ * <pre>
+ *    thrc - *
+ *    - - - *
+ *          * Tämä este onkin vasemmanpuoleisimmassa sarakkeessa!
+ *    - *     Este on toisessa sarakkeessa vasemmalta ja loppurivi on tyhjä
+ *            Tyhjä rivi on tyhjä rivi
+ * </pre>
  */
 public class ASCIILukija {
     private final static String OTSAKE = "thrc";
 
     private Scanner lukija;
 
+    /** Luo ASCIILukija-instanssin
+     *
+     * @param lukija Tiedoston lukemiseen käytettävä Scanner-instanssi
+     */
     public ASCIILukija(Scanner lukija) {
         this.lukija = lukija;
     }
@@ -31,6 +74,10 @@ public class ASCIILukija {
         return false;
     }
 
+    /** Lukee ruudukon konstruktorissa annetun lukijan avulla
+     *
+     * @return Ruudukko, joka vastaa luettua tietoa tai null.
+     */
     public Ruudukko lue() {
         Ruudukko ruudukko = null;
         String rivi;
