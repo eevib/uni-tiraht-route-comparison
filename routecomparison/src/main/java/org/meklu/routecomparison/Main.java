@@ -36,15 +36,16 @@ public class Main {
         }
         if (suoritusaikaA == suoritusaikaB) {
             System.out.println(rhA.nimi() + " ja " + rhB.nimi() + " olivat yhtä nopeita");
+        } else {
+            System.out.println(nopeampi.nimi() + " oli " + ((double) hitaampiAika / (double) nopeampiAika) + " kertaa niin nopea kuin " + hitaampi.nimi());
         }
-        System.out.println(nopeampi.nimi() + " oli " + ((double) hitaampiAika / (double) nopeampiAika) + " kertaa niin nopea kuin " + hitaampi.nimi());
     }
     public static void main(String[] args) throws Exception {
         System.out.print("Nykyinen hakemisto: ");
         System.out.println(new java.io.File(".").getCanonicalPath());
 
         if (0 == args.length) {
-            args = new String[] { "./thrc/plort.thrc", "-random", "-bench" };
+            args = new String[] { "-random", "-bench" };
         }
 
         int benchN = -1;
