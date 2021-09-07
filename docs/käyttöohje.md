@@ -25,7 +25,14 @@ java -jar target/RouteComparison-1.0-SNAPSHOT.jar thrc/simple.thrc -bench1000
 Suorituskykyvertailun voi myös jättää suorittamatta jättämällä
 `-bench`-parametrin pois. Alla oleva komento ajaa reitinhakualgoritmit
 tiedostosta `thrc/simple.thrc` haetulle ruudukolle ja kahdelle
-satunnaisruudukolle.
+satunnaisruudukolle. Tällöin se myös tulostaa reitit ASCII-muodossa
+komentorivi-ikkunaan tiettyjen suoritustietojen kanssa.
 ```
 java -jar target/RouteComparison-1.0-SNAPSHOT.jar thrc/simple.thrc -random -random
+```
+
+Mikäli haluaa nähdä hieman väriä reitin varrella, voi komennon putkittaa
+ainakin Unixin kaltaisilla järjestelmillä esimerkiksi `grep`-ohjelmalle.
+```
+java -jar target/RouteComparison-1.0-SNAPSHOT.jar -random | grep --color=always -E '@|!|'
 ```
