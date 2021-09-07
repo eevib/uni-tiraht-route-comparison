@@ -17,8 +17,8 @@ public class AStar implements Reitinhakija {
     private double[] naapurienPainot = new double[8];
     private Koordinaatti[] naapurit = new Koordinaatti[8];
 
-    public AStar(Ruudukko ruudukko, Heuristiikka heuristiikka) {
-        this.ruudukko = ruudukko;
+    public AStar(Heuristiikka heuristiikka) {
+        this.ruudukko = null;
         this.heuristiikka = heuristiikka;
 
         this.naapurienPainot = new double[8];
@@ -38,6 +38,11 @@ public class AStar implements Reitinhakija {
                 ++i;
             }
         }
+    }
+
+    public AStar(Ruudukko ruudukko, Heuristiikka heuristiikka) {
+        this(heuristiikka);
+        this.ruudukko = ruudukko;
     }
 
     private Koordinaatti[] kokoaReitti(Koordinaatti nykyinen) {
@@ -75,7 +80,7 @@ public class AStar implements Reitinhakija {
     @Override
     public void alusta(int lahtoX, int lahtoY, int maaliX, int maaliY) {
         this.diagnostiikka = new Diagnostiikka(this);
-        this.diagnostiikka.aloitaSuoritus();
+        //this.diagnostiikka.aloitaSuoritus();
 
         this.nykyinen = null;
         this.tulos = null;
@@ -87,7 +92,7 @@ public class AStar implements Reitinhakija {
         // tai ruudut ovat muutoin estyneet
         if (this.ruudukko.ruutuEstynyt(maaliX, maaliY) || this.ruudukko.ruutuEstynyt(lahtoX, lahtoY)) {
             this.valmis = true;
-            this.diagnostiikka.paataSuoritus();
+            //this.diagnostiikka.paataSuoritus();
             return;
         }
 
@@ -130,7 +135,7 @@ public class AStar implements Reitinhakija {
         this.halvinReittiTahan[lahtoY][lahtoX] = 0;
         this.halvinReittiMaaliin[lahtoY][lahtoX] = this.heuristiikka.lyhinMahdollinenEtaisyys(lahtoX, lahtoY, maaliX, maaliY);
 
-        this.diagnostiikka.paataSuoritus();
+        //this.diagnostiikka.paataSuoritus();
     }
 
     @Override

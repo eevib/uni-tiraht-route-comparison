@@ -17,5 +17,6 @@ Toteutetut algoritmit ovat Jump Point Search (JPS) ja A\*.
 
 ## Puutteita ja parannusehdotuksia
 
+- Pääohjelma on aika ruma
 - Graafinen käyttöliittymä ja vaiheittainen visualisaatio puuttuu, vaikka se
   olisikin aika triviaalia toteuttaa

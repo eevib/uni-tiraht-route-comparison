@@ -22,8 +22,8 @@ public class JPS implements Reitinhakija {
     private Diagnostiikka diagnostiikka;
     private final Koordinaatti[] suunnat;
 
-    public JPS(Ruudukko ruudukko, Heuristiikka heuristiikka) {
-        this.ruudukko = ruudukko;
+    public JPS(Heuristiikka heuristiikka) {
+        this.ruudukko = null;
         this.heuristiikka = heuristiikka;
 
         Koordinaatti[] naapurit = new Koordinaatti[8];
@@ -37,6 +37,11 @@ public class JPS implements Reitinhakija {
             }
         }
         this.suunnat = naapurit;
+    }
+
+    public JPS(Ruudukko ruudukko, Heuristiikka heuristiikka) {
+        this(heuristiikka);
+        this.ruudukko = ruudukko;
     }
 
     private Koordinaatti[] kokoaReitti(Koordinaatti nykyinen) {
@@ -291,7 +296,7 @@ public class JPS implements Reitinhakija {
     @Override
     public void alusta(int lahtoX, int lahtoY, int maaliX, int maaliY) {
         this.diagnostiikka = new Diagnostiikka(this);
-        this.diagnostiikka.aloitaSuoritus();
+        //this.diagnostiikka.aloitaSuoritus();
 
         this.nykyinen = null;
         this.tulos = null;
@@ -303,7 +308,7 @@ public class JPS implements Reitinhakija {
         // tai ruudut ovat muutoin estyneet
         if (this.ruudukko.ruutuEstynyt(maaliX, maaliY) || this.ruudukko.ruutuEstynyt(lahtoX, lahtoY)) {
             this.valmis = true;
-            this.diagnostiikka.paataSuoritus();
+            //this.diagnostiikka.paataSuoritus();
             return;
         }
 
@@ -346,7 +351,7 @@ public class JPS implements Reitinhakija {
         this.halvinReittiTahan[lahtoY][lahtoX] = 0;
         this.halvinReittiMaaliin[lahtoY][lahtoX] = this.heuristiikka.lyhinMahdollinenEtaisyys(lahtoX, lahtoY, maaliX, maaliY);
 
-        this.diagnostiikka.paataSuoritus();
+        //this.diagnostiikka.paataSuoritus();
     }
 
     @Override
