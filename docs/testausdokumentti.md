@@ -13,7 +13,7 @@ Yksikkötestit voi suorittaa ajamalla repositorion juurihakemistosta löytyväss
 ## Koodikattavuusraportti
 
 Tämänhetkinen koodikattavuusraportti löytyy osoitteesta
-  https://meklu.org/code/uni/tiraht/jacoco-vko6/
+  https://meklu.org/code/uni/tiraht/jacoco-vko7/
 
 Koodikattavuusraportin voi generoida ajamalla repositorion juurihakemistosta
 löytyvässä `routecomparison/` -hakemistossa komennon `mvn jacoco:report`.
